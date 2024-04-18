@@ -1,6 +1,5 @@
 ---
 title: "Portfolio DSFB"
-author: "Alex Sung"
 site: bookdown::bookdown_site
 documentclass: book
 output:

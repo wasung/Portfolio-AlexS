@@ -1,0 +1,20 @@
+---
+title: "Portfolio DSFB"
+author: "Alex Sung"
+site: bookdown::bookdown_site
+documentclass: book
+output:
+  bookdown::gitbook: default
+  #bookdown::pdf_book: default
+---
+
+# Introduction
+
+welcome to my Data Science for Biology portfolio! My name Alex Sung, and I am a life scientist with a interest in applying data science techniques to solve biological problems.
+
+## About Me
+I am currently pursuing a Bachelor's degree in Life Science with a specialization in Biomolecular Research at HU University of Applied Sciences in Utrecht, the Netherlands. Additionally, I am minoring in Data Science for Biology, which has allowed me to explore the intersection of life sciences and computational methods.
+
+## Contact 
+email:
+github:

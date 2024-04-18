@@ -1,0 +1,97 @@
+---
+title: "Curriculum Vitae - Wing-kien Alex Sung"
+author: "Wing-kien Alex Sung"
+output:
+  pdf_document: default
+geometry: margin=1.5cm
+---
+
+# Wing-kien Alex Sung {-}
+
+- **Street Address**: De kriek 29  
+- **City**: Utrecht  
+- **Postal Code**: 3451 KK  
+- **Country**: The Netherlands  
+- **E-mail**: wkasung@gmail.com  
+- **Date of Birth**: 24 September 2000  
+- **Nationality**: Dutch  
+
+## Education {-}
+
+- **2020 - Present**  
+  **HU University of Applied Sciences, Utrecht, the Netherlands**  
+  *Bachelor programme Life Science*  
+  - Biomolecular Research specialisation  
+  - Minor Data Science for Biology  
+
+- **2012 - 2018**  
+  **Niftarlake College, Maarssen, the Netherlands**  
+  *General Secondary Education (upper-intermediate level)*  
+
+## Work Experience {-}
+
+- **2023 - Present**  
+  **Panda Analytics BV, Rotterdam, the Netherlands**  
+  *Business Analyst*  
+  - Analyzed sales data using Power BI to extract insights and trends.
+  - Developed comprehensive dashboards aiding informed decision-making.
+  - Collaborated closely with stakeholders to translate complex data into user-friendly reports.
+  - Automated reporting processes for streamlined operations.
+
+- **2023 - Present**  
+  **Kokoro Beauty BV, Rotterdam, the Netherlands**  
+  *Founder and Operational Lead*  
+  - Founded and steered Kokoro Skincare into a leading Japanese skincare e-commerce platform.
+  - Oversaw strategic financial planning and operational optimization.
+  - Implemented cross-functional strategies to enhance market presence in the skincare industry.
+
+- **2023 - Present**  
+  **Future-ed, Rotterdam, the Netherlands**  
+  *Business strategy analyst*  
+  - Led strategic positioning efforts for Future-ed in the ed-tech sector.
+  - Conducted comprehensive market research and nurtured strategic partnerships.
+  - Drove innovation in marketing strategies to adapt to dynamic market conditions.
+
+- **2023 – Present**  
+  **European Sperm Bank, Amsterdam, the Netherlands**  
+  *Laboratory Assistant*  
+  - Managed adherence to laboratory SOPs and conducted comprehensive sperm analysis.
+  - Ensured stringent quality control measures and coordinated sperm straws' preparation and shipment.
+
+- **2022 - 2022**  
+  **Saltro BV, Utrecht, the Netherlands**  
+  *Laboratory Technician*  
+  - Executed precise analysis of COVID-19 samples using rt-qPCR techniques.
+  - Contributed to enhanced laboratory protocols and accurate reporting vital for public health measures.
+
+- **2021 - 2021**  
+  **Eurofins, Barneveld, the Netherlands**  
+  *Laboratory Technician*  
+  - Conducted soil and water pretreatment for precise ICP-MS analysis.
+  - Applied varied chemical processes to optimize sample preparation for accurate detection of contaminants.
+
+## Activities {-}
+
+- **2023 – Present**  
+  **CSA-EUR, Rotterdam, the Netherlands**  
+  *Active Member Delft Committee*  
+  - Managed communications, vendor coordination, and event logistics for successful events.
+  - Improved existing plans and processes for enhanced event planning services.
+
+- **2020 - Present**  
+  **HU University of Applied Sciences, Utrecht, the Netherlands**  
+  *Honours Programme*  
+  - Engaged in diverse honours courses and participated in real-world projects.
+  - Conducted research, collaborated with stakeholders, and developed impactful self-initiated projects.
+
+## Additional Skills {-}
+
+- **Foreign Languages**: English (reading, writing, speaking: good)
+- **Computer Skills**: 
+  - Microsoft Office tools: Outlook, Word, Excel, PowerPoint (good command)
+  - PowerBI (good command)
+  - IBM SPSS Statistics (fair command)
+  - RStudio (fair command)
+- **Driving License**: Full
+- **Hobbies**: Fitness, Badminton, Reading, Photography
+

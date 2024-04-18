@@ -1,12 +1,4 @@
----
-title: "Curriculum Vitae - Wing-kien Alex Sung"
-author: "Wing-kien Alex Sung"
-output:
-  pdf_document: default
-geometry: margin=1.5cm
----
-
-# Wing-kien Alex Sung {-}
+# Wing-kien Alex Sung
 
 - **Street Address**: De kriek 29  
 - **City**: Utrecht  

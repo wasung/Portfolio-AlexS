@@ -1,6 +1,3 @@
-hello-world
+introduction
+contact
 wing-kien-alex-sung
-education
-work-experience
-activities
-additional-skills

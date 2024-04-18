@@ -10,11 +10,8 @@ output:
 
 # Introduction
 
-welcome to my Data Science for Biology portfolio! My name Alex Sung, and I am a life scientist with a interest in applying data science techniques to solve biological problems.
-
-## About Me
-I am currently pursuing a Bachelor's degree in Life Science with a specialization in Biomolecular Research at HU University of Applied Sciences in Utrecht, the Netherlands. Additionally, I am minoring in Data Science for Biology, which has allowed me to explore the intersection of life sciences and computational methods.
+welcome to my Data Science for Biology portfolio! My name Alex Sung, and I am a life scientist with a interest in applying data science techniques to solve biological problems.I am currently pursuing a Bachelor's degree in Life Science with a specialization in Biomolecular Research at HU University of Applied Sciences in Utrecht, the Netherlands. Additionally, I am minoring in Data Science for Biology, which has allowed me to explore the intersection of life sciences and computational methods. The course is created by ... This github page will serve as my portfolio as data scientist. 
 
 ## Contact 
-email:
-github:
+- email: wkasung@gmail.com
+- github: 

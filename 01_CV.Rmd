@@ -1,8 +1,6 @@
-# Wing-kien Alex Sung
+# Curriculum Vitae Wing-kien Alex Sung
 
-- **Street Address**: De kriek 29  
 - **City**: Utrecht  
-- **Postal Code**: 3451 KK  
 - **Country**: The Netherlands  
 - **E-mail**: wkasung@gmail.com  
 - **Date of Birth**: 24 September 2000  

@@ -1,0 +1,5 @@
+# Looking ahead
+In the future I probably want to work in consulting. I am still highly interested in the life science sector but want to be involved in other sides of the sector. I feel like doing the data science course is something I did because I feel like its a valuable hardskill to have as I am still considering working in finance or BI. In this field its good to already have knowledge in data workflows and analysis.
+
+## Professional development
+To reach these goals I have a long way to go and a lot to learn in and outside of my educational carreer. During the DSFB course we are free to work on a datascience or bioinformatics related skill. For this I am probably looking at BI or python since this aligns most with what I want in my carreer.

@@ -1,0 +1,21 @@
+# C.Elegans Plate experiment
+
+*Question A: "Review the following Excel file in the ./data/CE.LIQ.FLOW.062_Tidydata.xlsx, by opening the file in Excel. See if you can spot anything peculiar about this file. Do not edit the file in any way. Just close it when you are done. (Annoyingly, Excel asks you to save your changes, even if you did not touch anything in the file.)"*
+A: Parameters tab is unclear what colomn means what. There is a 'Raw data' column, what does this mean and what is it for? Also would be nice to have some explanation on all the colours and why does the pink column run down so far. The other tabs are even more unclear its hard to find where things are and even more hard to find what it means.
+
+*Question B: "Open the file in R, using the {readxl} package."*
+*Question C: "Inspect the data types of columns RawData, compName and compConcentration. What types would you expect from the experimental description above. Have the data types been correctly assigned during the importing of the data into R?"*
+
+C:
+```{r ReadXL}
+library("here")
+library(tidyverse)
+library(readxl)
+
+
+CElegans_data <- read_excel(here::here("Data", "CE.LIQ.FLOW.062_Tidydata.xlsx"))
+
+head(CElegans_data)
+```
+
+*Question D:"Create a graph displaying a scatterplot for the CE.LIQ.FLOW.062_Tidydata.xlsx data, for the different compounds and the varying concentrations. Put the compConcentration on the x-axis, the DataRaw counts on the y-axis and assign a colour to each level in compName. Assign a different symbol (shape =) to each level in the expType variable. Try fixing the labels of the x-axis so that we can read them."*

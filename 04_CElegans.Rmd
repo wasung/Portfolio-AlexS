@@ -19,3 +19,30 @@ head(CElegans_data)
 ```
 
 *Question D:"Create a graph displaying a scatterplot for the CE.LIQ.FLOW.062_Tidydata.xlsx data, for the different compounds and the varying concentrations. Put the compConcentration on the x-axis, the DataRaw counts on the y-axis and assign a colour to each level in compName. Assign a different symbol (shape =) to each level in the expType variable. Try fixing the labels of the x-axis so that we can read them."*
+```{r ggplot}
+library(ggplot2)
+library(tidyverse)
+
+
+# chr to factor conversion
+CElegans_data$compName <- factor(CElegans_data$compName, levels = unique(CElegans_data$compName))
+CElegans_data$expType <- factor(CElegans_data$expType, levels = unique(CElegans_data$expType))
+CElegans_data$compConcentration <- parse_number(CElegans_data$compConcentration)
+
+# checking the conversion to factor
+levels(CElegans_data$compName)
+levels(CElegans_data$expType)
+
+str(CElegans_data)
+
+# Plotting the scatterplot with dynamic shape assignment
+ggplot(CElegans_data, aes(x = log10(compConcentration), y = RawData)) +
+  geom_point(aes(color = compName, shape = expType), size = 1.5, alpha = 0.8, position = position_jitter(width = 0.15)) +
+  labs(title = "CE.LIQ", caption = "think of a caption",x = " Log10 Compound Concentration", y = "DataRaw Counts") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+*Question E: "When creating the plot under C), what happened with the ordering of the x-axis labels. Explain why this happens. Look at the data-type of the compConcentration column in the data again to find a clue."*
+The x-axis labels overlap, you need to angle them slightly so all labels are readable.
+

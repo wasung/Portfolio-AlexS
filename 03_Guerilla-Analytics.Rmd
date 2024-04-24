@@ -1,1 +1,2 @@
 # Guerilla Analytics
+Need to run the data at home through the pipe and clean up the folders still ( will use projecticum folders).

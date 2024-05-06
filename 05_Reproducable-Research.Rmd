@@ -19,3 +19,10 @@ There is no section on fundings, however there is a section on acknowledgements.
 
 ### Data availability statement and location
 There is a small section where supplementary materials can be accessed. THere is a download link to the 'data sheet'. The sheet is a word doc with the processed data in figures in a doc file. Access to raw data would be better to have. It does however mention that you can inquire for more data but it requires you to contact the authors but, there is no author contact info available. Furthermore no code was used for this research.
+
+#Reproducable research part 2
+
+## Estimating the effects of non-pharmaceutical interventions on COVID-19 in Europe
+The paper has  R code shared in the project enviroment and has clear instructions how to reproduce the data form the paper.
+https://www.nature.com/articles/s41586-020-2405-7
+https://github.com/ImperialCollegeLondon/covid19model?tab=readme-ov-file

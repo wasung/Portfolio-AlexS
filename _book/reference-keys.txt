@@ -12,3 +12,4 @@ study-location
 ethics-statement
 funding-statement
 data-availability-statement-and-location
+estimating-the-effects-of-non-pharmaceutical-interventions-on-covid-19-in-europe

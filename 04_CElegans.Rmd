@@ -46,3 +46,10 @@ ggplot(CElegans_data, aes(x = log10(compConcentration), y = RawData)) +
 *Question E: "When creating the plot under C), what happened with the ordering of the x-axis labels. Explain why this happens. Look at the data-type of the compConcentration column in the data again to find a clue."*
 The x-axis labels overlap, you need to angle them slightly so all labels are readable.
 
+(G) The positive control for this experiments is controlPositive. (H) The negative control for this experiment is controlNegative.
+
+*Question I: Think about how you would analyze this experiment to learn whether there is indeed an effect of different concentrations on offspring count and whether the different compounds have a different curve (IC50). Write down you analysis as a step-wise plan.*
+Step-wise plan (need to make)
+
+*Question K Normalize the data for the controlNegative in such a way that the mean value for controlNegative is exactly equal to 1 and that all other values are expressed as a fraction thereof. Rerun your graphs with the normalized data. Why would you want to take this step?*
+It makes it easier to compare relative changes across different conditions and facilitates the interpretation of treatment effects.

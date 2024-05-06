@@ -31,7 +31,7 @@ The script runs smoohtly after installing all packages. I got the code from : ht
 It clearly states version 7 was used for the Nature paper so I used that one. For this base-nature.r script was used.
 On a scale from 1-5 I would rate this paper a 5 in how easy it was to reproduce. I could import the all the scripts from their github and rerun their data through the scripts the used.
 
-```{r visualization, echo=TRUE}
+```{r visualization, eval=FALSE}
 library(rstan)
 library(data.table)
 library(lubridate)

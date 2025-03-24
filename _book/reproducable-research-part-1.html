@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>6 Reproducable research part 1 | Portfolio DSFB</title>
   <meta name="description" content="6 Reproducable research part 1 | Portfolio DSFB" />
-  <meta name="generator" content="bookdown 0.39 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="6 Reproducable research part 1 | Portfolio DSFB" />
   <meta property="og:type" content="book" />
@@ -216,140 +216,140 @@ The paper has R code shared in the project environment and has clear instruction
 The script runs smoohtly after installing all packages. I got the code from : <a href="https://github.com/ImperialCollegeLondon/covid19model.git" class="uri">https://github.com/ImperialCollegeLondon/covid19model.git</a></p>
 <p>It clearly states version 7 was used for the Nature paper so I used that one. For this base-nature.r script was used.
 On a scale from 1-5 I would rate this paper a 5 in how easy it was to reproduce. I could import the all the scripts from their github and rerun their data through the scripts the used.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="reproducable-research-part-1.html#cb16-1" tabindex="-1"></a><span class="fu">library</span>(rstan)</span>
-<span id="cb16-2"><a href="reproducable-research-part-1.html#cb16-2" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
-<span id="cb16-3"><a href="reproducable-research-part-1.html#cb16-3" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
-<span id="cb16-4"><a href="reproducable-research-part-1.html#cb16-4" tabindex="-1"></a><span class="fu">library</span>(gdata)</span>
-<span id="cb16-5"><a href="reproducable-research-part-1.html#cb16-5" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
-<span id="cb16-6"><a href="reproducable-research-part-1.html#cb16-6" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
-<span id="cb16-7"><a href="reproducable-research-part-1.html#cb16-7" tabindex="-1"></a><span class="fu">library</span>(EnvStats)</span>
-<span id="cb16-8"><a href="reproducable-research-part-1.html#cb16-8" tabindex="-1"></a><span class="fu">library</span>(optparse)</span>
-<span id="cb16-9"><a href="reproducable-research-part-1.html#cb16-9" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
-<span id="cb16-10"><a href="reproducable-research-part-1.html#cb16-10" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
-<span id="cb16-11"><a href="reproducable-research-part-1.html#cb16-11" tabindex="-1"></a><span class="fu">library</span>(matrixStats)</span>
-<span id="cb16-12"><a href="reproducable-research-part-1.html#cb16-12" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
-<span id="cb16-13"><a href="reproducable-research-part-1.html#cb16-13" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
-<span id="cb16-14"><a href="reproducable-research-part-1.html#cb16-14" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
-<span id="cb16-15"><a href="reproducable-research-part-1.html#cb16-15" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
-<span id="cb16-16"><a href="reproducable-research-part-1.html#cb16-16" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb16-17"><a href="reproducable-research-part-1.html#cb16-17" tabindex="-1"></a><span class="fu">library</span>(abind)</span>
-<span id="cb16-18"><a href="reproducable-research-part-1.html#cb16-18" tabindex="-1"></a></span>
-<span id="cb16-19"><a href="reproducable-research-part-1.html#cb16-19" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;nature/utils/process-covariates.r&#39;</span>)</span>
-<span id="cb16-20"><a href="reproducable-research-part-1.html#cb16-20" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="reproducable-research-part-1.html#cb16-21" tabindex="-1"></a><span class="co"># Commandline options and parsing</span></span>
-<span id="cb16-22"><a href="reproducable-research-part-1.html#cb16-22" tabindex="-1"></a>parser <span class="ot">&lt;-</span> <span class="fu">OptionParser</span>()</span>
-<span id="cb16-23"><a href="reproducable-research-part-1.html#cb16-23" tabindex="-1"></a>parser <span class="ot">&lt;-</span> <span class="fu">add_option</span>(parser, <span class="fu">c</span>(<span class="st">&quot;-D&quot;</span>, <span class="st">&quot;--debug&quot;</span>), <span class="at">action=</span><span class="st">&quot;store_true&quot;</span>,</span>
-<span id="cb16-24"><a href="reproducable-research-part-1.html#cb16-24" tabindex="-1"></a>                     <span class="at">help=</span><span class="st">&quot;Perform a debug run of the model&quot;</span>)</span>
-<span id="cb16-25"><a href="reproducable-research-part-1.html#cb16-25" tabindex="-1"></a>parser <span class="ot">&lt;-</span> <span class="fu">add_option</span>(parser, <span class="fu">c</span>(<span class="st">&quot;-F&quot;</span>, <span class="st">&quot;--full&quot;</span>), <span class="at">action=</span><span class="st">&quot;store_true&quot;</span>,</span>
-<span id="cb16-26"><a href="reproducable-research-part-1.html#cb16-26" tabindex="-1"></a>                     <span class="at">help=</span><span class="st">&quot;Perform a full run of the model&quot;</span>)</span>
-<span id="cb16-27"><a href="reproducable-research-part-1.html#cb16-27" tabindex="-1"></a>cmdoptions <span class="ot">&lt;-</span> <span class="fu">parse_args</span>(parser, <span class="at">args =</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>), <span class="at">positional_arguments =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-28"><a href="reproducable-research-part-1.html#cb16-28" tabindex="-1"></a></span>
-<span id="cb16-29"><a href="reproducable-research-part-1.html#cb16-29" tabindex="-1"></a><span class="co"># Default run parameters for the model</span></span>
-<span id="cb16-30"><a href="reproducable-research-part-1.html#cb16-30" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">is.null</span>(cmdoptions<span class="sc">$</span>options<span class="sc">$</span>debug)) {</span>
-<span id="cb16-31"><a href="reproducable-research-part-1.html#cb16-31" tabindex="-1"></a>  DEBUG <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;DEBUG&quot;</span>) <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span></span>
-<span id="cb16-32"><a href="reproducable-research-part-1.html#cb16-32" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb16-33"><a href="reproducable-research-part-1.html#cb16-33" tabindex="-1"></a>  DEBUG <span class="ot">=</span> cmdoptions<span class="sc">$</span>options<span class="sc">$</span>debug</span>
-<span id="cb16-34"><a href="reproducable-research-part-1.html#cb16-34" tabindex="-1"></a>}</span>
-<span id="cb16-35"><a href="reproducable-research-part-1.html#cb16-35" tabindex="-1"></a></span>
-<span id="cb16-36"><a href="reproducable-research-part-1.html#cb16-36" tabindex="-1"></a><span class="co"># Sys.setenv(FULL = &quot;TRUE&quot;)</span></span>
-<span id="cb16-37"><a href="reproducable-research-part-1.html#cb16-37" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">is.null</span>(cmdoptions<span class="sc">$</span>options<span class="sc">$</span>full)) {</span>
-<span id="cb16-38"><a href="reproducable-research-part-1.html#cb16-38" tabindex="-1"></a>  FULL <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;FULL&quot;</span>) <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span></span>
-<span id="cb16-39"><a href="reproducable-research-part-1.html#cb16-39" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb16-40"><a href="reproducable-research-part-1.html#cb16-40" tabindex="-1"></a>  FULL <span class="ot">=</span> cmdoptions<span class="sc">$</span>options<span class="sc">$</span>full</span>
-<span id="cb16-41"><a href="reproducable-research-part-1.html#cb16-41" tabindex="-1"></a>}</span>
-<span id="cb16-42"><a href="reproducable-research-part-1.html#cb16-42" tabindex="-1"></a></span>
-<span id="cb16-43"><a href="reproducable-research-part-1.html#cb16-43" tabindex="-1"></a><span class="cf">if</span>(DEBUG <span class="sc">&amp;&amp;</span> FULL) {</span>
-<span id="cb16-44"><a href="reproducable-research-part-1.html#cb16-44" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">&quot;Setting both debug and full run modes at once is invalid&quot;</span>)</span>
-<span id="cb16-45"><a href="reproducable-research-part-1.html#cb16-45" tabindex="-1"></a>}</span>
-<span id="cb16-46"><a href="reproducable-research-part-1.html#cb16-46" tabindex="-1"></a></span>
-<span id="cb16-47"><a href="reproducable-research-part-1.html#cb16-47" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(cmdoptions<span class="sc">$</span>args) <span class="sc">==</span> <span class="dv">0</span>) {</span>
-<span id="cb16-48"><a href="reproducable-research-part-1.html#cb16-48" tabindex="-1"></a>  StanModel <span class="ot">=</span> <span class="st">&#39;base-nature&#39;</span></span>
-<span id="cb16-49"><a href="reproducable-research-part-1.html#cb16-49" tabindex="-1"></a>} <span class="cf">else</span> {</span>
-<span id="cb16-50"><a href="reproducable-research-part-1.html#cb16-50" tabindex="-1"></a>  StanModel <span class="ot">=</span> cmdoptions<span class="sc">$</span>args[<span class="dv">1</span>]</span>
-<span id="cb16-51"><a href="reproducable-research-part-1.html#cb16-51" tabindex="-1"></a>}</span>
-<span id="cb16-52"><a href="reproducable-research-part-1.html#cb16-52" tabindex="-1"></a></span>
-<span id="cb16-53"><a href="reproducable-research-part-1.html#cb16-53" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Running %s&quot;</span>,StanModel))</span>
-<span id="cb16-54"><a href="reproducable-research-part-1.html#cb16-54" tabindex="-1"></a><span class="cf">if</span>(DEBUG) {</span>
-<span id="cb16-55"><a href="reproducable-research-part-1.html#cb16-55" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Running in DEBUG mode&quot;</span>)</span>
-<span id="cb16-56"><a href="reproducable-research-part-1.html#cb16-56" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (FULL) {</span>
-<span id="cb16-57"><a href="reproducable-research-part-1.html#cb16-57" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Running in FULL mode&quot;</span>)</span>
-<span id="cb16-58"><a href="reproducable-research-part-1.html#cb16-58" tabindex="-1"></a>}</span>
-<span id="cb16-59"><a href="reproducable-research-part-1.html#cb16-59" tabindex="-1"></a></span>
-<span id="cb16-60"><a href="reproducable-research-part-1.html#cb16-60" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Running:</span><span class="sc">\n</span><span class="st">StanModel = %s</span><span class="sc">\n</span><span class="st">Debug: %s</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
-<span id="cb16-61"><a href="reproducable-research-part-1.html#cb16-61" tabindex="-1"></a>            StanModel,DEBUG))</span>
-<span id="cb16-62"><a href="reproducable-research-part-1.html#cb16-62" tabindex="-1"></a></span>
-<span id="cb16-63"><a href="reproducable-research-part-1.html#cb16-63" tabindex="-1"></a><span class="co"># Read which countires to use</span></span>
-<span id="cb16-64"><a href="reproducable-research-part-1.html#cb16-64" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;nature/data/regions.rds&#39;</span>)</span>
-<span id="cb16-65"><a href="reproducable-research-part-1.html#cb16-65" tabindex="-1"></a><span class="co"># Read deaths data for regions</span></span>
-<span id="cb16-66"><a href="reproducable-research-part-1.html#cb16-66" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;nature/data/COVID-19-up-to-date.rds&#39;</span>)</span>
-<span id="cb16-67"><a href="reproducable-research-part-1.html#cb16-67" tabindex="-1"></a><span class="co"># Read IFR and pop by country</span></span>
-<span id="cb16-68"><a href="reproducable-research-part-1.html#cb16-68" tabindex="-1"></a>ifr.by.country <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;nature/data/popt-ifr.rds&#39;</span>)</span>
-<span id="cb16-69"><a href="reproducable-research-part-1.html#cb16-69" tabindex="-1"></a></span>
-<span id="cb16-70"><a href="reproducable-research-part-1.html#cb16-70" tabindex="-1"></a><span class="co"># Read interventions</span></span>
-<span id="cb16-71"><a href="reproducable-research-part-1.html#cb16-71" tabindex="-1"></a>interventions <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;nature/data/interventions.rds&#39;</span>)</span>
-<span id="cb16-72"><a href="reproducable-research-part-1.html#cb16-72" tabindex="-1"></a></span>
-<span id="cb16-73"><a href="reproducable-research-part-1.html#cb16-73" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># increase to get correct number of days to simulate</span></span>
-<span id="cb16-74"><a href="reproducable-research-part-1.html#cb16-74" tabindex="-1"></a><span class="co"># Maximum number of days to simulate</span></span>
-<span id="cb16-75"><a href="reproducable-research-part-1.html#cb16-75" tabindex="-1"></a>N2 <span class="ot">&lt;-</span> (<span class="fu">max</span>(d<span class="sc">$</span>DateRep) <span class="sc">-</span> <span class="fu">min</span>(d<span class="sc">$</span>DateRep) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> forecast)[[<span class="dv">1</span>]]</span>
-<span id="cb16-76"><a href="reproducable-research-part-1.html#cb16-76" tabindex="-1"></a></span>
-<span id="cb16-77"><a href="reproducable-research-part-1.html#cb16-77" tabindex="-1"></a>processed_data <span class="ot">&lt;-</span> <span class="fu">process_covariates</span>(<span class="at">countries =</span> countries, <span class="at">interventions =</span> interventions, </span>
-<span id="cb16-78"><a href="reproducable-research-part-1.html#cb16-78" tabindex="-1"></a>                                     <span class="at">d =</span> d , <span class="at">ifr.by.country =</span> ifr.by.country, <span class="at">N2 =</span> N2)</span>
-<span id="cb16-79"><a href="reproducable-research-part-1.html#cb16-79" tabindex="-1"></a></span>
-<span id="cb16-80"><a href="reproducable-research-part-1.html#cb16-80" tabindex="-1"></a>stan_data <span class="ot">=</span> processed_data<span class="sc">$</span>stan_data</span>
-<span id="cb16-81"><a href="reproducable-research-part-1.html#cb16-81" tabindex="-1"></a>dates <span class="ot">=</span> processed_data<span class="sc">$</span>dates</span>
-<span id="cb16-82"><a href="reproducable-research-part-1.html#cb16-82" tabindex="-1"></a>deaths_by_country <span class="ot">=</span> processed_data<span class="sc">$</span>deaths_by_country</span>
-<span id="cb16-83"><a href="reproducable-research-part-1.html#cb16-83" tabindex="-1"></a>reported_cases <span class="ot">=</span> processed_data<span class="sc">$</span>reported_cases</span>
-<span id="cb16-84"><a href="reproducable-research-part-1.html#cb16-84" tabindex="-1"></a><span class="fu">options</span>(<span class="at">mc.cores =</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>())</span>
-<span id="cb16-85"><a href="reproducable-research-part-1.html#cb16-85" tabindex="-1"></a><span class="fu">rstan_options</span>(<span class="at">auto_write =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb16-86"><a href="reproducable-research-part-1.html#cb16-86" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">stan_model</span>(<span class="fu">paste0</span>(<span class="st">&#39;nature/stan-models/&#39;</span>,StanModel,<span class="st">&#39;.stan&#39;</span>))</span>
-<span id="cb16-87"><a href="reproducable-research-part-1.html#cb16-87" tabindex="-1"></a></span>
-<span id="cb16-88"><a href="reproducable-research-part-1.html#cb16-88" tabindex="-1"></a><span class="cf">if</span>(DEBUG) {</span>
-<span id="cb16-89"><a href="reproducable-research-part-1.html#cb16-89" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">sampling</span>(m,<span class="at">data=</span>stan_data,<span class="at">iter=</span><span class="dv">40</span>,<span class="at">warmup=</span><span class="dv">20</span>,<span class="at">chains=</span><span class="dv">2</span>)</span>
-<span id="cb16-90"><a href="reproducable-research-part-1.html#cb16-90" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (FULL) {</span>
-<span id="cb16-91"><a href="reproducable-research-part-1.html#cb16-91" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">sampling</span>(m,<span class="at">data=</span>stan_data,<span class="at">iter=</span><span class="dv">1800</span>,<span class="at">warmup=</span><span class="dv">1000</span>,<span class="at">chains=</span><span class="dv">5</span>,<span class="at">thin=</span><span class="dv">1</span>,<span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.99</span>, <span class="at">max_treedepth =</span> <span class="dv">20</span>))</span>
-<span id="cb16-92"><a href="reproducable-research-part-1.html#cb16-92" tabindex="-1"></a>} <span class="cf">else</span> { </span>
-<span id="cb16-93"><a href="reproducable-research-part-1.html#cb16-93" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">sampling</span>(m,<span class="at">data=</span>stan_data,<span class="at">iter=</span><span class="dv">600</span>,<span class="at">warmup=</span><span class="dv">300</span>,<span class="at">chains=</span><span class="dv">4</span>,<span class="at">thin=</span><span class="dv">1</span>,<span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.95</span>, <span class="at">max_treedepth =</span> <span class="dv">10</span>))</span>
-<span id="cb16-94"><a href="reproducable-research-part-1.html#cb16-94" tabindex="-1"></a>}   </span>
-<span id="cb16-95"><a href="reproducable-research-part-1.html#cb16-95" tabindex="-1"></a></span>
-<span id="cb16-96"><a href="reproducable-research-part-1.html#cb16-96" tabindex="-1"></a>out <span class="ot">=</span> rstan<span class="sc">::</span><span class="fu">extract</span>(fit)</span>
-<span id="cb16-97"><a href="reproducable-research-part-1.html#cb16-97" tabindex="-1"></a>prediction <span class="ot">=</span> out<span class="sc">$</span>prediction</span>
-<span id="cb16-98"><a href="reproducable-research-part-1.html#cb16-98" tabindex="-1"></a>estimated.deaths <span class="ot">=</span> out<span class="sc">$</span>E_deaths</span>
-<span id="cb16-99"><a href="reproducable-research-part-1.html#cb16-99" tabindex="-1"></a>estimated.deaths.cf <span class="ot">=</span> out<span class="sc">$</span>E_deaths0</span>
-<span id="cb16-100"><a href="reproducable-research-part-1.html#cb16-100" tabindex="-1"></a></span>
-<span id="cb16-101"><a href="reproducable-research-part-1.html#cb16-101" tabindex="-1"></a>JOBID <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;PBS_JOBID&quot;</span>)</span>
-<span id="cb16-102"><a href="reproducable-research-part-1.html#cb16-102" tabindex="-1"></a><span class="cf">if</span>(JOBID <span class="sc">==</span> <span class="st">&quot;&quot;</span>)</span>
-<span id="cb16-103"><a href="reproducable-research-part-1.html#cb16-103" tabindex="-1"></a>  JOBID <span class="ot">=</span> <span class="fu">as.character</span>(<span class="fu">abs</span>(<span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>) <span class="sc">*</span> <span class="dv">1000000</span>)))</span>
-<span id="cb16-104"><a href="reproducable-research-part-1.html#cb16-104" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Jobid = %s&quot;</span>,JOBID))</span>
-<span id="cb16-105"><a href="reproducable-research-part-1.html#cb16-105" tabindex="-1"></a></span>
-<span id="cb16-106"><a href="reproducable-research-part-1.html#cb16-106" tabindex="-1"></a>countries <span class="ot">&lt;-</span> countries<span class="sc">$</span>Regions</span>
-<span id="cb16-107"><a href="reproducable-research-part-1.html#cb16-107" tabindex="-1"></a><span class="fu">save</span>(fit,prediction,dates,reported_cases,deaths_by_country,countries,estimated.deaths,estimated.deaths.cf,stan_data, <span class="at">file=</span><span class="fu">paste0</span>(<span class="st">&#39;nature/results/&#39;</span>,StanModel,<span class="st">&#39;-&#39;</span>,JOBID,<span class="st">&#39;-stanfit.Rdata&#39;</span>))</span>
-<span id="cb16-108"><a href="reproducable-research-part-1.html#cb16-108" tabindex="-1"></a></span>
-<span id="cb16-109"><a href="reproducable-research-part-1.html#cb16-109" tabindex="-1"></a></span>
-<span id="cb16-110"><a href="reproducable-research-part-1.html#cb16-110" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
-<span id="cb16-111"><a href="reproducable-research-part-1.html#cb16-111" tabindex="-1"></a>filename <span class="ot">&lt;-</span> <span class="fu">paste0</span>(StanModel,<span class="st">&#39;-&#39;</span>,JOBID)</span>
-<span id="cb16-112"><a href="reproducable-research-part-1.html#cb16-112" tabindex="-1"></a></span>
-<span id="cb16-113"><a href="reproducable-research-part-1.html#cb16-113" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Generating mu, rt plots&#39;</span>)</span>
-<span id="cb16-114"><a href="reproducable-research-part-1.html#cb16-114" tabindex="-1"></a>mu <span class="ot">=</span> (<span class="fu">as.matrix</span>(out<span class="sc">$</span>mu))</span>
-<span id="cb16-115"><a href="reproducable-research-part-1.html#cb16-115" tabindex="-1"></a><span class="fu">colnames</span>(mu) <span class="ot">=</span> countries</span>
-<span id="cb16-116"><a href="reproducable-research-part-1.html#cb16-116" tabindex="-1"></a>g <span class="ot">=</span> (<span class="fu">mcmc_intervals</span>(mu,<span class="at">prob =</span> .<span class="dv">9</span>))</span>
-<span id="cb16-117"><a href="reproducable-research-part-1.html#cb16-117" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">sprintf</span>(<span class="st">&quot;nature/figures/%s-mu.png&quot;</span>,filename),g,<span class="at">width=</span><span class="dv">4</span>,<span class="at">height=</span><span class="dv">6</span>)</span>
-<span id="cb16-118"><a href="reproducable-research-part-1.html#cb16-118" tabindex="-1"></a>tmp <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(countries), <span class="cf">function</span>(i) (out<span class="sc">$</span>Rt_adj[,stan_data<span class="sc">$</span>N[i],i]))</span>
-<span id="cb16-119"><a href="reproducable-research-part-1.html#cb16-119" tabindex="-1"></a>Rt_adj <span class="ot">=</span> <span class="fu">do.call</span>(cbind,tmp)</span>
-<span id="cb16-120"><a href="reproducable-research-part-1.html#cb16-120" tabindex="-1"></a><span class="fu">colnames</span>(Rt_adj) <span class="ot">=</span> countries</span>
-<span id="cb16-121"><a href="reproducable-research-part-1.html#cb16-121" tabindex="-1"></a>g <span class="ot">=</span> (<span class="fu">mcmc_intervals</span>(Rt_adj,<span class="at">prob =</span> .<span class="dv">9</span>))</span>
-<span id="cb16-122"><a href="reproducable-research-part-1.html#cb16-122" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">sprintf</span>(<span class="st">&quot;nature/figures/%s-final-rt.png&quot;</span>,filename),g,<span class="at">width=</span><span class="dv">4</span>,<span class="at">height=</span><span class="dv">6</span>)</span>
-<span id="cb16-123"><a href="reproducable-research-part-1.html#cb16-123" tabindex="-1"></a></span>
-<span id="cb16-124"><a href="reproducable-research-part-1.html#cb16-124" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Generate 3-panel plots&quot;</span>)</span>
-<span id="cb16-125"><a href="reproducable-research-part-1.html#cb16-125" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;nature/utils/plot-3-panel.r&#39;</span>)</span>
-<span id="cb16-126"><a href="reproducable-research-part-1.html#cb16-126" tabindex="-1"></a><span class="fu">make_three_panel_plot</span>(filename)</span>
-<span id="cb16-127"><a href="reproducable-research-part-1.html#cb16-127" tabindex="-1"></a></span>
-<span id="cb16-128"><a href="reproducable-research-part-1.html#cb16-128" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Covars plots&#39;</span>)</span>
-<span id="cb16-129"><a href="reproducable-research-part-1.html#cb16-129" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;nature/utils/covariate-size-effects.r&#39;</span>)</span>
-<span id="cb16-130"><a href="reproducable-research-part-1.html#cb16-130" tabindex="-1"></a><span class="fu">plot_covars</span>(filename)</span>
-<span id="cb16-131"><a href="reproducable-research-part-1.html#cb16-131" tabindex="-1"></a></span>
-<span id="cb16-132"><a href="reproducable-research-part-1.html#cb16-132" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Making table&#39;</span>)</span>
-<span id="cb16-133"><a href="reproducable-research-part-1.html#cb16-133" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;nature/utils/make-table.r&#39;</span>)</span>
-<span id="cb16-134"><a href="reproducable-research-part-1.html#cb16-134" tabindex="-1"></a><span class="fu">make_table</span>(filename)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="reproducable-research-part-1.html#cb29-1" tabindex="-1"></a><span class="fu">library</span>(rstan)</span>
+<span id="cb29-2"><a href="reproducable-research-part-1.html#cb29-2" tabindex="-1"></a><span class="fu">library</span>(data.table)</span>
+<span id="cb29-3"><a href="reproducable-research-part-1.html#cb29-3" tabindex="-1"></a><span class="fu">library</span>(lubridate)</span>
+<span id="cb29-4"><a href="reproducable-research-part-1.html#cb29-4" tabindex="-1"></a><span class="fu">library</span>(gdata)</span>
+<span id="cb29-5"><a href="reproducable-research-part-1.html#cb29-5" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb29-6"><a href="reproducable-research-part-1.html#cb29-6" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb29-7"><a href="reproducable-research-part-1.html#cb29-7" tabindex="-1"></a><span class="fu">library</span>(EnvStats)</span>
+<span id="cb29-8"><a href="reproducable-research-part-1.html#cb29-8" tabindex="-1"></a><span class="fu">library</span>(optparse)</span>
+<span id="cb29-9"><a href="reproducable-research-part-1.html#cb29-9" tabindex="-1"></a><span class="fu">library</span>(stringr)</span>
+<span id="cb29-10"><a href="reproducable-research-part-1.html#cb29-10" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb29-11"><a href="reproducable-research-part-1.html#cb29-11" tabindex="-1"></a><span class="fu">library</span>(matrixStats)</span>
+<span id="cb29-12"><a href="reproducable-research-part-1.html#cb29-12" tabindex="-1"></a><span class="fu">library</span>(scales)</span>
+<span id="cb29-13"><a href="reproducable-research-part-1.html#cb29-13" tabindex="-1"></a><span class="fu">library</span>(gridExtra)</span>
+<span id="cb29-14"><a href="reproducable-research-part-1.html#cb29-14" tabindex="-1"></a><span class="fu">library</span>(ggpubr)</span>
+<span id="cb29-15"><a href="reproducable-research-part-1.html#cb29-15" tabindex="-1"></a><span class="fu">library</span>(cowplot)</span>
+<span id="cb29-16"><a href="reproducable-research-part-1.html#cb29-16" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb29-17"><a href="reproducable-research-part-1.html#cb29-17" tabindex="-1"></a><span class="fu">library</span>(abind)</span>
+<span id="cb29-18"><a href="reproducable-research-part-1.html#cb29-18" tabindex="-1"></a></span>
+<span id="cb29-19"><a href="reproducable-research-part-1.html#cb29-19" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;nature/utils/process-covariates.r&#39;</span>)</span>
+<span id="cb29-20"><a href="reproducable-research-part-1.html#cb29-20" tabindex="-1"></a></span>
+<span id="cb29-21"><a href="reproducable-research-part-1.html#cb29-21" tabindex="-1"></a><span class="co"># Commandline options and parsing</span></span>
+<span id="cb29-22"><a href="reproducable-research-part-1.html#cb29-22" tabindex="-1"></a>parser <span class="ot">&lt;-</span> <span class="fu">OptionParser</span>()</span>
+<span id="cb29-23"><a href="reproducable-research-part-1.html#cb29-23" tabindex="-1"></a>parser <span class="ot">&lt;-</span> <span class="fu">add_option</span>(parser, <span class="fu">c</span>(<span class="st">&quot;-D&quot;</span>, <span class="st">&quot;--debug&quot;</span>), <span class="at">action=</span><span class="st">&quot;store_true&quot;</span>,</span>
+<span id="cb29-24"><a href="reproducable-research-part-1.html#cb29-24" tabindex="-1"></a>                     <span class="at">help=</span><span class="st">&quot;Perform a debug run of the model&quot;</span>)</span>
+<span id="cb29-25"><a href="reproducable-research-part-1.html#cb29-25" tabindex="-1"></a>parser <span class="ot">&lt;-</span> <span class="fu">add_option</span>(parser, <span class="fu">c</span>(<span class="st">&quot;-F&quot;</span>, <span class="st">&quot;--full&quot;</span>), <span class="at">action=</span><span class="st">&quot;store_true&quot;</span>,</span>
+<span id="cb29-26"><a href="reproducable-research-part-1.html#cb29-26" tabindex="-1"></a>                     <span class="at">help=</span><span class="st">&quot;Perform a full run of the model&quot;</span>)</span>
+<span id="cb29-27"><a href="reproducable-research-part-1.html#cb29-27" tabindex="-1"></a>cmdoptions <span class="ot">&lt;-</span> <span class="fu">parse_args</span>(parser, <span class="at">args =</span> <span class="fu">commandArgs</span>(<span class="at">trailingOnly =</span> <span class="cn">TRUE</span>), <span class="at">positional_arguments =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-28"><a href="reproducable-research-part-1.html#cb29-28" tabindex="-1"></a></span>
+<span id="cb29-29"><a href="reproducable-research-part-1.html#cb29-29" tabindex="-1"></a><span class="co"># Default run parameters for the model</span></span>
+<span id="cb29-30"><a href="reproducable-research-part-1.html#cb29-30" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">is.null</span>(cmdoptions<span class="sc">$</span>options<span class="sc">$</span>debug)) {</span>
+<span id="cb29-31"><a href="reproducable-research-part-1.html#cb29-31" tabindex="-1"></a>  DEBUG <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;DEBUG&quot;</span>) <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span></span>
+<span id="cb29-32"><a href="reproducable-research-part-1.html#cb29-32" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb29-33"><a href="reproducable-research-part-1.html#cb29-33" tabindex="-1"></a>  DEBUG <span class="ot">=</span> cmdoptions<span class="sc">$</span>options<span class="sc">$</span>debug</span>
+<span id="cb29-34"><a href="reproducable-research-part-1.html#cb29-34" tabindex="-1"></a>}</span>
+<span id="cb29-35"><a href="reproducable-research-part-1.html#cb29-35" tabindex="-1"></a></span>
+<span id="cb29-36"><a href="reproducable-research-part-1.html#cb29-36" tabindex="-1"></a><span class="co"># Sys.setenv(FULL = &quot;TRUE&quot;)</span></span>
+<span id="cb29-37"><a href="reproducable-research-part-1.html#cb29-37" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">is.null</span>(cmdoptions<span class="sc">$</span>options<span class="sc">$</span>full)) {</span>
+<span id="cb29-38"><a href="reproducable-research-part-1.html#cb29-38" tabindex="-1"></a>  FULL <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;FULL&quot;</span>) <span class="sc">==</span> <span class="st">&quot;TRUE&quot;</span></span>
+<span id="cb29-39"><a href="reproducable-research-part-1.html#cb29-39" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb29-40"><a href="reproducable-research-part-1.html#cb29-40" tabindex="-1"></a>  FULL <span class="ot">=</span> cmdoptions<span class="sc">$</span>options<span class="sc">$</span>full</span>
+<span id="cb29-41"><a href="reproducable-research-part-1.html#cb29-41" tabindex="-1"></a>}</span>
+<span id="cb29-42"><a href="reproducable-research-part-1.html#cb29-42" tabindex="-1"></a></span>
+<span id="cb29-43"><a href="reproducable-research-part-1.html#cb29-43" tabindex="-1"></a><span class="cf">if</span>(DEBUG <span class="sc">&amp;&amp;</span> FULL) {</span>
+<span id="cb29-44"><a href="reproducable-research-part-1.html#cb29-44" tabindex="-1"></a>  <span class="fu">stop</span>(<span class="st">&quot;Setting both debug and full run modes at once is invalid&quot;</span>)</span>
+<span id="cb29-45"><a href="reproducable-research-part-1.html#cb29-45" tabindex="-1"></a>}</span>
+<span id="cb29-46"><a href="reproducable-research-part-1.html#cb29-46" tabindex="-1"></a></span>
+<span id="cb29-47"><a href="reproducable-research-part-1.html#cb29-47" tabindex="-1"></a><span class="cf">if</span>(<span class="fu">length</span>(cmdoptions<span class="sc">$</span>args) <span class="sc">==</span> <span class="dv">0</span>) {</span>
+<span id="cb29-48"><a href="reproducable-research-part-1.html#cb29-48" tabindex="-1"></a>  StanModel <span class="ot">=</span> <span class="st">&#39;base-nature&#39;</span></span>
+<span id="cb29-49"><a href="reproducable-research-part-1.html#cb29-49" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb29-50"><a href="reproducable-research-part-1.html#cb29-50" tabindex="-1"></a>  StanModel <span class="ot">=</span> cmdoptions<span class="sc">$</span>args[<span class="dv">1</span>]</span>
+<span id="cb29-51"><a href="reproducable-research-part-1.html#cb29-51" tabindex="-1"></a>}</span>
+<span id="cb29-52"><a href="reproducable-research-part-1.html#cb29-52" tabindex="-1"></a></span>
+<span id="cb29-53"><a href="reproducable-research-part-1.html#cb29-53" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Running %s&quot;</span>,StanModel))</span>
+<span id="cb29-54"><a href="reproducable-research-part-1.html#cb29-54" tabindex="-1"></a><span class="cf">if</span>(DEBUG) {</span>
+<span id="cb29-55"><a href="reproducable-research-part-1.html#cb29-55" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Running in DEBUG mode&quot;</span>)</span>
+<span id="cb29-56"><a href="reproducable-research-part-1.html#cb29-56" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (FULL) {</span>
+<span id="cb29-57"><a href="reproducable-research-part-1.html#cb29-57" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">&quot;Running in FULL mode&quot;</span>)</span>
+<span id="cb29-58"><a href="reproducable-research-part-1.html#cb29-58" tabindex="-1"></a>}</span>
+<span id="cb29-59"><a href="reproducable-research-part-1.html#cb29-59" tabindex="-1"></a></span>
+<span id="cb29-60"><a href="reproducable-research-part-1.html#cb29-60" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Running:</span><span class="sc">\n</span><span class="st">StanModel = %s</span><span class="sc">\n</span><span class="st">Debug: %s</span><span class="sc">\n</span><span class="st">&quot;</span>,</span>
+<span id="cb29-61"><a href="reproducable-research-part-1.html#cb29-61" tabindex="-1"></a>            StanModel,DEBUG))</span>
+<span id="cb29-62"><a href="reproducable-research-part-1.html#cb29-62" tabindex="-1"></a></span>
+<span id="cb29-63"><a href="reproducable-research-part-1.html#cb29-63" tabindex="-1"></a><span class="co"># Read which countires to use</span></span>
+<span id="cb29-64"><a href="reproducable-research-part-1.html#cb29-64" tabindex="-1"></a>countries <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;nature/data/regions.rds&#39;</span>)</span>
+<span id="cb29-65"><a href="reproducable-research-part-1.html#cb29-65" tabindex="-1"></a><span class="co"># Read deaths data for regions</span></span>
+<span id="cb29-66"><a href="reproducable-research-part-1.html#cb29-66" tabindex="-1"></a>d <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;nature/data/COVID-19-up-to-date.rds&#39;</span>)</span>
+<span id="cb29-67"><a href="reproducable-research-part-1.html#cb29-67" tabindex="-1"></a><span class="co"># Read IFR and pop by country</span></span>
+<span id="cb29-68"><a href="reproducable-research-part-1.html#cb29-68" tabindex="-1"></a>ifr.by.country <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;nature/data/popt-ifr.rds&#39;</span>)</span>
+<span id="cb29-69"><a href="reproducable-research-part-1.html#cb29-69" tabindex="-1"></a></span>
+<span id="cb29-70"><a href="reproducable-research-part-1.html#cb29-70" tabindex="-1"></a><span class="co"># Read interventions</span></span>
+<span id="cb29-71"><a href="reproducable-research-part-1.html#cb29-71" tabindex="-1"></a>interventions <span class="ot">&lt;-</span> <span class="fu">readRDS</span>(<span class="st">&#39;nature/data/interventions.rds&#39;</span>)</span>
+<span id="cb29-72"><a href="reproducable-research-part-1.html#cb29-72" tabindex="-1"></a></span>
+<span id="cb29-73"><a href="reproducable-research-part-1.html#cb29-73" tabindex="-1"></a>forecast <span class="ot">&lt;-</span> <span class="dv">0</span> <span class="co"># increase to get correct number of days to simulate</span></span>
+<span id="cb29-74"><a href="reproducable-research-part-1.html#cb29-74" tabindex="-1"></a><span class="co"># Maximum number of days to simulate</span></span>
+<span id="cb29-75"><a href="reproducable-research-part-1.html#cb29-75" tabindex="-1"></a>N2 <span class="ot">&lt;-</span> (<span class="fu">max</span>(d<span class="sc">$</span>DateRep) <span class="sc">-</span> <span class="fu">min</span>(d<span class="sc">$</span>DateRep) <span class="sc">+</span> <span class="dv">1</span> <span class="sc">+</span> forecast)[[<span class="dv">1</span>]]</span>
+<span id="cb29-76"><a href="reproducable-research-part-1.html#cb29-76" tabindex="-1"></a></span>
+<span id="cb29-77"><a href="reproducable-research-part-1.html#cb29-77" tabindex="-1"></a>processed_data <span class="ot">&lt;-</span> <span class="fu">process_covariates</span>(<span class="at">countries =</span> countries, <span class="at">interventions =</span> interventions, </span>
+<span id="cb29-78"><a href="reproducable-research-part-1.html#cb29-78" tabindex="-1"></a>                                     <span class="at">d =</span> d , <span class="at">ifr.by.country =</span> ifr.by.country, <span class="at">N2 =</span> N2)</span>
+<span id="cb29-79"><a href="reproducable-research-part-1.html#cb29-79" tabindex="-1"></a></span>
+<span id="cb29-80"><a href="reproducable-research-part-1.html#cb29-80" tabindex="-1"></a>stan_data <span class="ot">=</span> processed_data<span class="sc">$</span>stan_data</span>
+<span id="cb29-81"><a href="reproducable-research-part-1.html#cb29-81" tabindex="-1"></a>dates <span class="ot">=</span> processed_data<span class="sc">$</span>dates</span>
+<span id="cb29-82"><a href="reproducable-research-part-1.html#cb29-82" tabindex="-1"></a>deaths_by_country <span class="ot">=</span> processed_data<span class="sc">$</span>deaths_by_country</span>
+<span id="cb29-83"><a href="reproducable-research-part-1.html#cb29-83" tabindex="-1"></a>reported_cases <span class="ot">=</span> processed_data<span class="sc">$</span>reported_cases</span>
+<span id="cb29-84"><a href="reproducable-research-part-1.html#cb29-84" tabindex="-1"></a><span class="fu">options</span>(<span class="at">mc.cores =</span> parallel<span class="sc">::</span><span class="fu">detectCores</span>())</span>
+<span id="cb29-85"><a href="reproducable-research-part-1.html#cb29-85" tabindex="-1"></a><span class="fu">rstan_options</span>(<span class="at">auto_write =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb29-86"><a href="reproducable-research-part-1.html#cb29-86" tabindex="-1"></a>m <span class="ot">=</span> <span class="fu">stan_model</span>(<span class="fu">paste0</span>(<span class="st">&#39;nature/stan-models/&#39;</span>,StanModel,<span class="st">&#39;.stan&#39;</span>))</span>
+<span id="cb29-87"><a href="reproducable-research-part-1.html#cb29-87" tabindex="-1"></a></span>
+<span id="cb29-88"><a href="reproducable-research-part-1.html#cb29-88" tabindex="-1"></a><span class="cf">if</span>(DEBUG) {</span>
+<span id="cb29-89"><a href="reproducable-research-part-1.html#cb29-89" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">sampling</span>(m,<span class="at">data=</span>stan_data,<span class="at">iter=</span><span class="dv">40</span>,<span class="at">warmup=</span><span class="dv">20</span>,<span class="at">chains=</span><span class="dv">2</span>)</span>
+<span id="cb29-90"><a href="reproducable-research-part-1.html#cb29-90" tabindex="-1"></a>} <span class="cf">else</span> <span class="cf">if</span> (FULL) {</span>
+<span id="cb29-91"><a href="reproducable-research-part-1.html#cb29-91" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">sampling</span>(m,<span class="at">data=</span>stan_data,<span class="at">iter=</span><span class="dv">1800</span>,<span class="at">warmup=</span><span class="dv">1000</span>,<span class="at">chains=</span><span class="dv">5</span>,<span class="at">thin=</span><span class="dv">1</span>,<span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.99</span>, <span class="at">max_treedepth =</span> <span class="dv">20</span>))</span>
+<span id="cb29-92"><a href="reproducable-research-part-1.html#cb29-92" tabindex="-1"></a>} <span class="cf">else</span> { </span>
+<span id="cb29-93"><a href="reproducable-research-part-1.html#cb29-93" tabindex="-1"></a>  fit <span class="ot">=</span> <span class="fu">sampling</span>(m,<span class="at">data=</span>stan_data,<span class="at">iter=</span><span class="dv">600</span>,<span class="at">warmup=</span><span class="dv">300</span>,<span class="at">chains=</span><span class="dv">4</span>,<span class="at">thin=</span><span class="dv">1</span>,<span class="at">control =</span> <span class="fu">list</span>(<span class="at">adapt_delta =</span> <span class="fl">0.95</span>, <span class="at">max_treedepth =</span> <span class="dv">10</span>))</span>
+<span id="cb29-94"><a href="reproducable-research-part-1.html#cb29-94" tabindex="-1"></a>}   </span>
+<span id="cb29-95"><a href="reproducable-research-part-1.html#cb29-95" tabindex="-1"></a></span>
+<span id="cb29-96"><a href="reproducable-research-part-1.html#cb29-96" tabindex="-1"></a>out <span class="ot">=</span> rstan<span class="sc">::</span><span class="fu">extract</span>(fit)</span>
+<span id="cb29-97"><a href="reproducable-research-part-1.html#cb29-97" tabindex="-1"></a>prediction <span class="ot">=</span> out<span class="sc">$</span>prediction</span>
+<span id="cb29-98"><a href="reproducable-research-part-1.html#cb29-98" tabindex="-1"></a>estimated.deaths <span class="ot">=</span> out<span class="sc">$</span>E_deaths</span>
+<span id="cb29-99"><a href="reproducable-research-part-1.html#cb29-99" tabindex="-1"></a>estimated.deaths.cf <span class="ot">=</span> out<span class="sc">$</span>E_deaths0</span>
+<span id="cb29-100"><a href="reproducable-research-part-1.html#cb29-100" tabindex="-1"></a></span>
+<span id="cb29-101"><a href="reproducable-research-part-1.html#cb29-101" tabindex="-1"></a>JOBID <span class="ot">=</span> <span class="fu">Sys.getenv</span>(<span class="st">&quot;PBS_JOBID&quot;</span>)</span>
+<span id="cb29-102"><a href="reproducable-research-part-1.html#cb29-102" tabindex="-1"></a><span class="cf">if</span>(JOBID <span class="sc">==</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb29-103"><a href="reproducable-research-part-1.html#cb29-103" tabindex="-1"></a>  JOBID <span class="ot">=</span> <span class="fu">as.character</span>(<span class="fu">abs</span>(<span class="fu">round</span>(<span class="fu">rnorm</span>(<span class="dv">1</span>) <span class="sc">*</span> <span class="dv">1000000</span>)))</span>
+<span id="cb29-104"><a href="reproducable-research-part-1.html#cb29-104" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">sprintf</span>(<span class="st">&quot;Jobid = %s&quot;</span>,JOBID))</span>
+<span id="cb29-105"><a href="reproducable-research-part-1.html#cb29-105" tabindex="-1"></a></span>
+<span id="cb29-106"><a href="reproducable-research-part-1.html#cb29-106" tabindex="-1"></a>countries <span class="ot">&lt;-</span> countries<span class="sc">$</span>Regions</span>
+<span id="cb29-107"><a href="reproducable-research-part-1.html#cb29-107" tabindex="-1"></a><span class="fu">save</span>(fit,prediction,dates,reported_cases,deaths_by_country,countries,estimated.deaths,estimated.deaths.cf,stan_data, <span class="at">file=</span><span class="fu">paste0</span>(<span class="st">&#39;nature/results/&#39;</span>,StanModel,<span class="st">&#39;-&#39;</span>,JOBID,<span class="st">&#39;-stanfit.Rdata&#39;</span>))</span>
+<span id="cb29-108"><a href="reproducable-research-part-1.html#cb29-108" tabindex="-1"></a></span>
+<span id="cb29-109"><a href="reproducable-research-part-1.html#cb29-109" tabindex="-1"></a></span>
+<span id="cb29-110"><a href="reproducable-research-part-1.html#cb29-110" tabindex="-1"></a><span class="fu">library</span>(bayesplot)</span>
+<span id="cb29-111"><a href="reproducable-research-part-1.html#cb29-111" tabindex="-1"></a>filename <span class="ot">&lt;-</span> <span class="fu">paste0</span>(StanModel,<span class="st">&#39;-&#39;</span>,JOBID)</span>
+<span id="cb29-112"><a href="reproducable-research-part-1.html#cb29-112" tabindex="-1"></a></span>
+<span id="cb29-113"><a href="reproducable-research-part-1.html#cb29-113" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Generating mu, rt plots&#39;</span>)</span>
+<span id="cb29-114"><a href="reproducable-research-part-1.html#cb29-114" tabindex="-1"></a>mu <span class="ot">=</span> (<span class="fu">as.matrix</span>(out<span class="sc">$</span>mu))</span>
+<span id="cb29-115"><a href="reproducable-research-part-1.html#cb29-115" tabindex="-1"></a><span class="fu">colnames</span>(mu) <span class="ot">=</span> countries</span>
+<span id="cb29-116"><a href="reproducable-research-part-1.html#cb29-116" tabindex="-1"></a>g <span class="ot">=</span> (<span class="fu">mcmc_intervals</span>(mu,<span class="at">prob =</span> .<span class="dv">9</span>))</span>
+<span id="cb29-117"><a href="reproducable-research-part-1.html#cb29-117" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">sprintf</span>(<span class="st">&quot;nature/figures/%s-mu.png&quot;</span>,filename),g,<span class="at">width=</span><span class="dv">4</span>,<span class="at">height=</span><span class="dv">6</span>)</span>
+<span id="cb29-118"><a href="reproducable-research-part-1.html#cb29-118" tabindex="-1"></a>tmp <span class="ot">=</span> <span class="fu">lapply</span>(<span class="dv">1</span><span class="sc">:</span><span class="fu">length</span>(countries), <span class="cf">function</span>(i) (out<span class="sc">$</span>Rt_adj[,stan_data<span class="sc">$</span>N[i],i]))</span>
+<span id="cb29-119"><a href="reproducable-research-part-1.html#cb29-119" tabindex="-1"></a>Rt_adj <span class="ot">=</span> <span class="fu">do.call</span>(cbind,tmp)</span>
+<span id="cb29-120"><a href="reproducable-research-part-1.html#cb29-120" tabindex="-1"></a><span class="fu">colnames</span>(Rt_adj) <span class="ot">=</span> countries</span>
+<span id="cb29-121"><a href="reproducable-research-part-1.html#cb29-121" tabindex="-1"></a>g <span class="ot">=</span> (<span class="fu">mcmc_intervals</span>(Rt_adj,<span class="at">prob =</span> .<span class="dv">9</span>))</span>
+<span id="cb29-122"><a href="reproducable-research-part-1.html#cb29-122" tabindex="-1"></a><span class="fu">ggsave</span>(<span class="fu">sprintf</span>(<span class="st">&quot;nature/figures/%s-final-rt.png&quot;</span>,filename),g,<span class="at">width=</span><span class="dv">4</span>,<span class="at">height=</span><span class="dv">6</span>)</span>
+<span id="cb29-123"><a href="reproducable-research-part-1.html#cb29-123" tabindex="-1"></a></span>
+<span id="cb29-124"><a href="reproducable-research-part-1.html#cb29-124" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&quot;Generate 3-panel plots&quot;</span>)</span>
+<span id="cb29-125"><a href="reproducable-research-part-1.html#cb29-125" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;nature/utils/plot-3-panel.r&#39;</span>)</span>
+<span id="cb29-126"><a href="reproducable-research-part-1.html#cb29-126" tabindex="-1"></a><span class="fu">make_three_panel_plot</span>(filename)</span>
+<span id="cb29-127"><a href="reproducable-research-part-1.html#cb29-127" tabindex="-1"></a></span>
+<span id="cb29-128"><a href="reproducable-research-part-1.html#cb29-128" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Covars plots&#39;</span>)</span>
+<span id="cb29-129"><a href="reproducable-research-part-1.html#cb29-129" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;nature/utils/covariate-size-effects.r&#39;</span>)</span>
+<span id="cb29-130"><a href="reproducable-research-part-1.html#cb29-130" tabindex="-1"></a><span class="fu">plot_covars</span>(filename)</span>
+<span id="cb29-131"><a href="reproducable-research-part-1.html#cb29-131" tabindex="-1"></a></span>
+<span id="cb29-132"><a href="reproducable-research-part-1.html#cb29-132" tabindex="-1"></a><span class="fu">print</span>(<span class="st">&#39;Making table&#39;</span>)</span>
+<span id="cb29-133"><a href="reproducable-research-part-1.html#cb29-133" tabindex="-1"></a><span class="fu">source</span>(<span class="st">&#39;nature/utils/make-table.r&#39;</span>)</span>
+<span id="cb29-134"><a href="reproducable-research-part-1.html#cb29-134" tabindex="-1"></a><span class="fu">make_table</span>(filename)</span></code></pre></div>
 
 </div>
 </div>

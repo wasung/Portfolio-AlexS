@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>5 C.elegans Plate Experiment | Portfolio DSFB</title>
   <meta name="description" content="5 C.elegans Plate Experiment | Portfolio DSFB" />
-  <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.41 and GitBook 2.6.7" />
 
   <meta property="og:title" content="5 C.elegans Plate Experiment | Portfolio DSFB" />
   <meta property="og:type" content="book" />
@@ -149,7 +149,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="" data-path="looking-ahead.html"><a href="looking-ahead.html#professional-development"><i class="fa fa-check"></i>Professional Development</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="guerilla-analytics.html"><a href="guerilla-analytics.html"><i class="fa fa-check"></i><b>4</b> Guerilla Analytics</a></li>
+<li class="chapter" data-level="4" data-path="guerilla-analytics.html"><a href="guerilla-analytics.html"><i class="fa fa-check"></i><b>4</b> Guerilla Analytics</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="guerilla-analytics.html"><a href="guerilla-analytics.html#tasks"><i class="fa fa-check"></i><b>4.1</b> Tasks</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="guerilla-analytics.html"><a href="guerilla-analytics.html#reorganize-your-daur-ii-project"><i class="fa fa-check"></i><b>4.1.1</b> 1. <strong>Reorganize Your DAUR-II Project</strong></a></li>
+<li class="chapter" data-level="4.1.2" data-path="guerilla-analytics.html"><a href="guerilla-analytics.html#apply-to-your-rnaseq-and-metagenomics-work"><i class="fa fa-check"></i><b>4.1.2</b> 2. <strong>Apply to Your RNAseq and Metagenomics Work</strong></a></li>
+<li class="chapter" data-level="4.1.3" data-path="guerilla-analytics.html"><a href="guerilla-analytics.html#use-the-fs-package-to-generate-a-folder-tree-screenshot"><i class="fa fa-check"></i><b>4.1.3</b> 3. <strong>Use the <code>{fs}</code> Package to Generate a Folder Tree Screenshot</strong></a></li>
+</ul></li>
+</ul></li>
 <li class="chapter" data-level="5" data-path="c.elegans-plate-experiment.html"><a href="c.elegans-plate-experiment.html"><i class="fa fa-check"></i><b>5</b> C.elegans Plate Experiment</a>
 <ul>
 <li class="chapter" data-level="5.1" data-path="c.elegans-plate-experiment.html"><a href="c.elegans-plate-experiment.html#exploring-the-excel-dataset-structure"><i class="fa fa-check"></i><b>5.1</b> Exploring the Excel Dataset Structure</a></li>
@@ -206,44 +214,44 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="importing-the-dataset-into-r" class="section level2 hasAnchor" number="5.2">
 <h2><span class="header-section-number">5.2</span> Importing the Dataset into R<a href="c.elegans-plate-experiment.html#importing-the-dataset-into-r" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>“Open the file in R using the <code>{readxl}</code> package.”</strong></p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="c.elegans-plate-experiment.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(here)</span>
-<span id="cb1-2"><a href="c.elegans-plate-experiment.html#cb1-2" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
-<span id="cb1-3"><a href="c.elegans-plate-experiment.html#cb1-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-4"><a href="c.elegans-plate-experiment.html#cb1-4" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="c.elegans-plate-experiment.html#cb1-5" tabindex="-1"></a><span class="co"># Import data</span></span>
-<span id="cb1-6"><a href="c.elegans-plate-experiment.html#cb1-6" tabindex="-1"></a>CElegans_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data&quot;</span>, <span class="st">&quot;CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
-<span id="cb1-7"><a href="c.elegans-plate-experiment.html#cb1-7" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="c.elegans-plate-experiment.html#cb1-8" tabindex="-1"></a><span class="co"># Preview</span></span>
-<span id="cb1-9"><a href="c.elegans-plate-experiment.html#cb1-9" tabindex="-1"></a><span class="fu">head</span>(CElegans_data)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="c.elegans-plate-experiment.html#cb3-1" tabindex="-1"></a><span class="fu">library</span>(here)</span>
+<span id="cb3-2"><a href="c.elegans-plate-experiment.html#cb3-2" tabindex="-1"></a><span class="fu">library</span>(readxl)</span>
+<span id="cb3-3"><a href="c.elegans-plate-experiment.html#cb3-3" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb3-4"><a href="c.elegans-plate-experiment.html#cb3-4" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="c.elegans-plate-experiment.html#cb3-5" tabindex="-1"></a><span class="co"># Import data</span></span>
+<span id="cb3-6"><a href="c.elegans-plate-experiment.html#cb3-6" tabindex="-1"></a>CElegans_data <span class="ot">&lt;-</span> <span class="fu">read_excel</span>(here<span class="sc">::</span><span class="fu">here</span>(<span class="st">&quot;Data&quot;</span>, <span class="st">&quot;CE.LIQ.FLOW.062_Tidydata.xlsx&quot;</span>))</span>
+<span id="cb3-7"><a href="c.elegans-plate-experiment.html#cb3-7" tabindex="-1"></a></span>
+<span id="cb3-8"><a href="c.elegans-plate-experiment.html#cb3-8" tabindex="-1"></a><span class="co"># Preview</span></span>
+<span id="cb3-9"><a href="c.elegans-plate-experiment.html#cb3-9" tabindex="-1"></a><span class="fu">head</span>(CElegans_data)</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 34
-##   plateRow plateColumn vialNr dropCode expType    expReplicate expName expDate             expResearcher expTime expUnit expVolumeCounted RawData compCASRN compName
-##   &lt;lgl&gt;    &lt;lgl&gt;        &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;             &lt;dbl&gt; &lt;chr&gt;   &lt;dttm&gt;              &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;   
-## 1 NA       NA               1 a        experiment            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      44 24157-81… 2,6-dii…
-## 2 NA       NA               1 b        experiment            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      37 24157-81… 2,6-dii…
-## 3 NA       NA               1 c        experiment            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      45 24157-81… 2,6-dii…
-## 4 NA       NA               1 d        experiment            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      47 24157-81… 2,6-dii…
-## 5 NA       NA               1 e        experiment            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      41 24157-81… 2,6-dii…
-## 6 NA       NA               2 a        experiment            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      35 24157-81… 2,6-dii…
-## # ℹ 19 more variables: compConcentration &lt;chr&gt;, compUnit &lt;chr&gt;, compDelivery &lt;chr&gt;, compVehicle &lt;chr&gt;, elegansStrain &lt;chr&gt;, elegansInput &lt;dbl&gt;,
-## #   bacterialStrain &lt;chr&gt;, bacterialTreatment &lt;chr&gt;, bacterialOD600 &lt;dbl&gt;, bacterialConcX &lt;dbl&gt;, bacterialVolume &lt;dbl&gt;, bacterialVolUnit &lt;chr&gt;,
-## #   incubationVial &lt;chr&gt;, incubationVolume &lt;dbl&gt;, incubationUnit &lt;chr&gt;, incubationMethod &lt;chr&gt;, incubationRPM &lt;dbl&gt;, bubble &lt;lgl&gt;, incubateTemperature &lt;dbl&gt;</code></pre>
+##   plateRow plateColumn vialNr dropCode expType   expReplicate expName expDate             expResearcher expTime expUnit expVolumeCounted RawData compCASRN compName compConcentration
+##   &lt;lgl&gt;    &lt;lgl&gt;        &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;            &lt;dbl&gt; &lt;chr&gt;   &lt;dttm&gt;              &lt;chr&gt;           &lt;dbl&gt; &lt;chr&gt;              &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;     &lt;chr&gt;    &lt;chr&gt;            
+## 1 NA       NA               1 a        experime…            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      44 24157-81… 2,6-dii… 4.99             
+## 2 NA       NA               1 b        experime…            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      37 24157-81… 2,6-dii… 4.99             
+## 3 NA       NA               1 c        experime…            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      45 24157-81… 2,6-dii… 4.99             
+## 4 NA       NA               1 d        experime…            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      47 24157-81… 2,6-dii… 4.99             
+## 5 NA       NA               1 e        experime…            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      41 24157-81… 2,6-dii… 4.99             
+## 6 NA       NA               2 a        experime…            3 CE.LIQ… 2020-11-30 00:00:00 Sergio Reijn…      68 hour                  50      35 24157-81… 2,6-dii… 4.99             
+## # ℹ 18 more variables: compUnit &lt;chr&gt;, compDelivery &lt;chr&gt;, compVehicle &lt;chr&gt;, elegansStrain &lt;chr&gt;, elegansInput &lt;dbl&gt;, bacterialStrain &lt;chr&gt;, bacterialTreatment &lt;chr&gt;,
+## #   bacterialOD600 &lt;dbl&gt;, bacterialConcX &lt;dbl&gt;, bacterialVolume &lt;dbl&gt;, bacterialVolUnit &lt;chr&gt;, incubationVial &lt;chr&gt;, incubationVolume &lt;dbl&gt;, incubationUnit &lt;chr&gt;,
+## #   incubationMethod &lt;chr&gt;, incubationRPM &lt;dbl&gt;, bubble &lt;lgl&gt;, incubateTemperature &lt;dbl&gt;</code></pre>
 </div>
 <div id="checking-and-correcting-data-types" class="section level2 hasAnchor" number="5.3">
 <h2><span class="header-section-number">5.3</span> Checking and Correcting Data Types<a href="c.elegans-plate-experiment.html#checking-and-correcting-data-types" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p>compConcentration was imported as character and was converted to numeric. compName and expType were converted to factors to allow proper grouping and visualization.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="c.elegans-plate-experiment.html#cb3-1" tabindex="-1"></a><span class="co"># Inspect column types</span></span>
-<span id="cb3-2"><a href="c.elegans-plate-experiment.html#cb3-2" tabindex="-1"></a><span class="fu">str</span>(CElegans_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(RawData, compName, compConcentration))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="c.elegans-plate-experiment.html#cb5-1" tabindex="-1"></a><span class="co"># Inspect column types</span></span>
+<span id="cb5-2"><a href="c.elegans-plate-experiment.html#cb5-2" tabindex="-1"></a><span class="fu">str</span>(CElegans_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(RawData, compName, compConcentration))</span></code></pre></div>
 <pre><code>## tibble [360 × 3] (S3: tbl_df/tbl/data.frame)
 ##  $ RawData          : num [1:360] 44 37 45 47 41 35 41 36 40 38 ...
 ##  $ compName         : chr [1:360] &quot;2,6-diisopropylnaphthalene&quot; &quot;2,6-diisopropylnaphthalene&quot; &quot;2,6-diisopropylnaphthalene&quot; &quot;2,6-diisopropylnaphthalene&quot; ...
 ##  $ compConcentration: chr [1:360] &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; &quot;4.99&quot; ...</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="c.elegans-plate-experiment.html#cb5-1" tabindex="-1"></a><span class="co"># Convert data types as needed</span></span>
-<span id="cb5-2"><a href="c.elegans-plate-experiment.html#cb5-2" tabindex="-1"></a>CElegans_data<span class="sc">$</span>compName <span class="ot">&lt;-</span> <span class="fu">factor</span>(CElegans_data<span class="sc">$</span>compName, <span class="at">levels =</span> <span class="fu">unique</span>(CElegans_data<span class="sc">$</span>compName))</span>
-<span id="cb5-3"><a href="c.elegans-plate-experiment.html#cb5-3" tabindex="-1"></a>CElegans_data<span class="sc">$</span>expType <span class="ot">&lt;-</span> <span class="fu">factor</span>(CElegans_data<span class="sc">$</span>expType, <span class="at">levels =</span> <span class="fu">unique</span>(CElegans_data<span class="sc">$</span>expType))</span>
-<span id="cb5-4"><a href="c.elegans-plate-experiment.html#cb5-4" tabindex="-1"></a>CElegans_data<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(CElegans_data<span class="sc">$</span>compConcentration)</span>
-<span id="cb5-5"><a href="c.elegans-plate-experiment.html#cb5-5" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="c.elegans-plate-experiment.html#cb5-6" tabindex="-1"></a><span class="co"># Confirm conversion</span></span>
-<span id="cb5-7"><a href="c.elegans-plate-experiment.html#cb5-7" tabindex="-1"></a><span class="fu">str</span>(CElegans_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(RawData, compName, compConcentration, expType))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="c.elegans-plate-experiment.html#cb7-1" tabindex="-1"></a><span class="co"># Convert data types as needed</span></span>
+<span id="cb7-2"><a href="c.elegans-plate-experiment.html#cb7-2" tabindex="-1"></a>CElegans_data<span class="sc">$</span>compName <span class="ot">&lt;-</span> <span class="fu">factor</span>(CElegans_data<span class="sc">$</span>compName, <span class="at">levels =</span> <span class="fu">unique</span>(CElegans_data<span class="sc">$</span>compName))</span>
+<span id="cb7-3"><a href="c.elegans-plate-experiment.html#cb7-3" tabindex="-1"></a>CElegans_data<span class="sc">$</span>expType <span class="ot">&lt;-</span> <span class="fu">factor</span>(CElegans_data<span class="sc">$</span>expType, <span class="at">levels =</span> <span class="fu">unique</span>(CElegans_data<span class="sc">$</span>expType))</span>
+<span id="cb7-4"><a href="c.elegans-plate-experiment.html#cb7-4" tabindex="-1"></a>CElegans_data<span class="sc">$</span>compConcentration <span class="ot">&lt;-</span> <span class="fu">parse_number</span>(CElegans_data<span class="sc">$</span>compConcentration)</span>
+<span id="cb7-5"><a href="c.elegans-plate-experiment.html#cb7-5" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="c.elegans-plate-experiment.html#cb7-6" tabindex="-1"></a><span class="co"># Confirm conversion</span></span>
+<span id="cb7-7"><a href="c.elegans-plate-experiment.html#cb7-7" tabindex="-1"></a><span class="fu">str</span>(CElegans_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(RawData, compName, compConcentration, expType))</span></code></pre></div>
 <pre><code>## tibble [360 × 4] (S3: tbl_df/tbl/data.frame)
 ##  $ RawData          : num [1:360] 44 37 45 47 41 35 41 36 40 38 ...
 ##  $ compName         : Factor w/ 5 levels &quot;2,6-diisopropylnaphthalene&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
@@ -252,27 +260,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="visualizing-raw-data-scatterplot" class="section level2 hasAnchor" number="5.4">
 <h2><span class="header-section-number">5.4</span> Visualizing Raw Data: Scatterplot<a href="c.elegans-plate-experiment.html#visualizing-raw-data-scatterplot" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="c.elegans-plate-experiment.html#cb7-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb7-2"><a href="c.elegans-plate-experiment.html#cb7-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb7-3"><a href="c.elegans-plate-experiment.html#cb7-3" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="c.elegans-plate-experiment.html#cb7-4" tabindex="-1"></a></span>
-<span id="cb7-5"><a href="c.elegans-plate-experiment.html#cb7-5" tabindex="-1"></a><span class="co"># Plotting the scatterplot with dynamic shape assignment</span></span>
-<span id="cb7-6"><a href="c.elegans-plate-experiment.html#cb7-6" tabindex="-1"></a><span class="fu">ggplot</span>(CElegans_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(compConcentration), <span class="at">y =</span> RawData)) <span class="sc">+</span></span>
-<span id="cb7-7"><a href="c.elegans-plate-experiment.html#cb7-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb7-8"><a href="c.elegans-plate-experiment.html#cb7-8" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> compName, <span class="at">shape =</span> expType),</span>
-<span id="cb7-9"><a href="c.elegans-plate-experiment.html#cb7-9" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">1.5</span>,</span>
-<span id="cb7-10"><a href="c.elegans-plate-experiment.html#cb7-10" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
-<span id="cb7-11"><a href="c.elegans-plate-experiment.html#cb7-11" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>)</span>
-<span id="cb7-12"><a href="c.elegans-plate-experiment.html#cb7-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-13"><a href="c.elegans-plate-experiment.html#cb7-13" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb7-14"><a href="c.elegans-plate-experiment.html#cb7-14" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;C. elegans Response by Compound and Concentration&quot;</span>,</span>
-<span id="cb7-15"><a href="c.elegans-plate-experiment.html#cb7-15" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Raw data colored by compound, shaped by experiment type&quot;</span>,</span>
-<span id="cb7-16"><a href="c.elegans-plate-experiment.html#cb7-16" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;log10(Compound Concentration) [nM]&quot;</span>,</span>
-<span id="cb7-17"><a href="c.elegans-plate-experiment.html#cb7-17" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Raw Data (counts)&quot;</span></span>
-<span id="cb7-18"><a href="c.elegans-plate-experiment.html#cb7-18" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb7-19"><a href="c.elegans-plate-experiment.html#cb7-19" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb7-20"><a href="c.elegans-plate-experiment.html#cb7-20" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb7-21"><a href="c.elegans-plate-experiment.html#cb7-21" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="c.elegans-plate-experiment.html#cb9-1" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb9-2"><a href="c.elegans-plate-experiment.html#cb9-2" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb9-3"><a href="c.elegans-plate-experiment.html#cb9-3" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="c.elegans-plate-experiment.html#cb9-4" tabindex="-1"></a></span>
+<span id="cb9-5"><a href="c.elegans-plate-experiment.html#cb9-5" tabindex="-1"></a><span class="co"># Plotting the scatterplot with dynamic shape assignment</span></span>
+<span id="cb9-6"><a href="c.elegans-plate-experiment.html#cb9-6" tabindex="-1"></a><span class="fu">ggplot</span>(CElegans_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(compConcentration), <span class="at">y =</span> RawData)) <span class="sc">+</span></span>
+<span id="cb9-7"><a href="c.elegans-plate-experiment.html#cb9-7" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb9-8"><a href="c.elegans-plate-experiment.html#cb9-8" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> compName, <span class="at">shape =</span> expType),</span>
+<span id="cb9-9"><a href="c.elegans-plate-experiment.html#cb9-9" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">1.5</span>,</span>
+<span id="cb9-10"><a href="c.elegans-plate-experiment.html#cb9-10" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
+<span id="cb9-11"><a href="c.elegans-plate-experiment.html#cb9-11" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>)</span>
+<span id="cb9-12"><a href="c.elegans-plate-experiment.html#cb9-12" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-13"><a href="c.elegans-plate-experiment.html#cb9-13" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb9-14"><a href="c.elegans-plate-experiment.html#cb9-14" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;C. elegans Response by Compound and Concentration&quot;</span>,</span>
+<span id="cb9-15"><a href="c.elegans-plate-experiment.html#cb9-15" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Raw data colored by compound, shaped by experiment type&quot;</span>,</span>
+<span id="cb9-16"><a href="c.elegans-plate-experiment.html#cb9-16" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;log10(Compound Concentration) [nM]&quot;</span>,</span>
+<span id="cb9-17"><a href="c.elegans-plate-experiment.html#cb9-17" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Raw Data (counts)&quot;</span></span>
+<span id="cb9-18"><a href="c.elegans-plate-experiment.html#cb9-18" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb9-19"><a href="c.elegans-plate-experiment.html#cb9-19" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb9-20"><a href="c.elegans-plate-experiment.html#cb9-20" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb9-21"><a href="c.elegans-plate-experiment.html#cb9-21" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## Warning: Removed 5 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
 <p><img src="_main_files/figure-html/ggplot-1.png" width="672" /></p>
 </div>
@@ -307,16 +315,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="normalizing-data-using-the-control-group" class="section level2 hasAnchor" number="5.9">
 <h2><span class="header-section-number">5.9</span> Normalizing Data Using the Control Group<a href="c.elegans-plate-experiment.html#normalizing-data-using-the-control-group" class="anchor-section" aria-label="Anchor link to header"></a></h2>
 <p><strong>“Normalize the data for the controlNegative in such a way that the mean value for controlNegative is exactly equal to 1 and that all other values are expressed as a fraction thereof. Rerun your graphs with the normalized data.”</strong></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="c.elegans-plate-experiment.html#cb9-1" tabindex="-1"></a><span class="co"># Calculate the mean for controlNegative</span></span>
-<span id="cb9-2"><a href="c.elegans-plate-experiment.html#cb9-2" tabindex="-1"></a>neg_ctrl <span class="ot">&lt;-</span> CElegans_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(expType <span class="sc">==</span> <span class="st">&quot;controlNegative&quot;</span>)</span>
-<span id="cb9-3"><a href="c.elegans-plate-experiment.html#cb9-3" tabindex="-1"></a>neg_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(neg_ctrl<span class="sc">$</span>RawData)</span>
-<span id="cb9-4"><a href="c.elegans-plate-experiment.html#cb9-4" tabindex="-1"></a></span>
-<span id="cb9-5"><a href="c.elegans-plate-experiment.html#cb9-5" tabindex="-1"></a><span class="co"># Normalize the RawData</span></span>
-<span id="cb9-6"><a href="c.elegans-plate-experiment.html#cb9-6" tabindex="-1"></a>CElegans_data <span class="ot">&lt;-</span> CElegans_data <span class="sc">%&gt;%</span></span>
-<span id="cb9-7"><a href="c.elegans-plate-experiment.html#cb9-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Normalized =</span> RawData <span class="sc">/</span> neg_mean)</span>
-<span id="cb9-8"><a href="c.elegans-plate-experiment.html#cb9-8" tabindex="-1"></a></span>
-<span id="cb9-9"><a href="c.elegans-plate-experiment.html#cb9-9" tabindex="-1"></a><span class="co"># Preview normalized data</span></span>
-<span id="cb9-10"><a href="c.elegans-plate-experiment.html#cb9-10" tabindex="-1"></a><span class="fu">head</span>(CElegans_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(compName, expType, compConcentration, RawData, Normalized))</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="c.elegans-plate-experiment.html#cb11-1" tabindex="-1"></a><span class="co"># Calculate the mean for controlNegative</span></span>
+<span id="cb11-2"><a href="c.elegans-plate-experiment.html#cb11-2" tabindex="-1"></a>neg_ctrl <span class="ot">&lt;-</span> CElegans_data <span class="sc">%&gt;%</span> <span class="fu">filter</span>(expType <span class="sc">==</span> <span class="st">&quot;controlNegative&quot;</span>)</span>
+<span id="cb11-3"><a href="c.elegans-plate-experiment.html#cb11-3" tabindex="-1"></a>neg_mean <span class="ot">&lt;-</span> <span class="fu">mean</span>(neg_ctrl<span class="sc">$</span>RawData)</span>
+<span id="cb11-4"><a href="c.elegans-plate-experiment.html#cb11-4" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="c.elegans-plate-experiment.html#cb11-5" tabindex="-1"></a><span class="co"># Normalize the RawData</span></span>
+<span id="cb11-6"><a href="c.elegans-plate-experiment.html#cb11-6" tabindex="-1"></a>CElegans_data <span class="ot">&lt;-</span> CElegans_data <span class="sc">%&gt;%</span></span>
+<span id="cb11-7"><a href="c.elegans-plate-experiment.html#cb11-7" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Normalized =</span> RawData <span class="sc">/</span> neg_mean)</span>
+<span id="cb11-8"><a href="c.elegans-plate-experiment.html#cb11-8" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="c.elegans-plate-experiment.html#cb11-9" tabindex="-1"></a><span class="co"># Preview normalized data</span></span>
+<span id="cb11-10"><a href="c.elegans-plate-experiment.html#cb11-10" tabindex="-1"></a><span class="fu">head</span>(CElegans_data <span class="sc">%&gt;%</span> <span class="fu">select</span>(compName, expType, compConcentration, RawData, Normalized))</span></code></pre></div>
 <pre><code>## # A tibble: 6 × 5
 ##   compName                   expType    compConcentration RawData Normalized
 ##   &lt;fct&gt;                      &lt;fct&gt;                  &lt;dbl&gt;   &lt;dbl&gt;      &lt;dbl&gt;
@@ -326,22 +334,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 2,6-diisopropylnaphthalene experiment              4.99      47      0.547
 ## 5 2,6-diisopropylnaphthalene experiment              4.99      41      0.477
 ## 6 2,6-diisopropylnaphthalene experiment              4.99      35      0.407</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="c.elegans-plate-experiment.html#cb11-1" tabindex="-1"></a><span class="fu">ggplot</span>(CElegans_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(compConcentration), <span class="at">y =</span> Normalized)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="c.elegans-plate-experiment.html#cb11-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
-<span id="cb11-3"><a href="c.elegans-plate-experiment.html#cb11-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> compName, <span class="at">shape =</span> expType),</span>
-<span id="cb11-4"><a href="c.elegans-plate-experiment.html#cb11-4" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">1.5</span>,</span>
-<span id="cb11-5"><a href="c.elegans-plate-experiment.html#cb11-5" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
-<span id="cb11-6"><a href="c.elegans-plate-experiment.html#cb11-6" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>)</span>
-<span id="cb11-7"><a href="c.elegans-plate-experiment.html#cb11-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-8"><a href="c.elegans-plate-experiment.html#cb11-8" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
-<span id="cb11-9"><a href="c.elegans-plate-experiment.html#cb11-9" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Normalized C. elegans Response&quot;</span>,</span>
-<span id="cb11-10"><a href="c.elegans-plate-experiment.html#cb11-10" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data normalized to controlNegative (mean = 1)&quot;</span>,</span>
-<span id="cb11-11"><a href="c.elegans-plate-experiment.html#cb11-11" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;log10(Compound Concentration) [nM]&quot;</span>,</span>
-<span id="cb11-12"><a href="c.elegans-plate-experiment.html#cb11-12" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Normalized Raw Data&quot;</span></span>
-<span id="cb11-13"><a href="c.elegans-plate-experiment.html#cb11-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
-<span id="cb11-14"><a href="c.elegans-plate-experiment.html#cb11-14" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
-<span id="cb11-15"><a href="c.elegans-plate-experiment.html#cb11-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
-<span id="cb11-16"><a href="c.elegans-plate-experiment.html#cb11-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="c.elegans-plate-experiment.html#cb13-1" tabindex="-1"></a><span class="fu">ggplot</span>(CElegans_data, <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">log10</span>(compConcentration), <span class="at">y =</span> Normalized)) <span class="sc">+</span></span>
+<span id="cb13-2"><a href="c.elegans-plate-experiment.html#cb13-2" tabindex="-1"></a>  <span class="fu">geom_point</span>(</span>
+<span id="cb13-3"><a href="c.elegans-plate-experiment.html#cb13-3" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">color =</span> compName, <span class="at">shape =</span> expType),</span>
+<span id="cb13-4"><a href="c.elegans-plate-experiment.html#cb13-4" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">1.5</span>,</span>
+<span id="cb13-5"><a href="c.elegans-plate-experiment.html#cb13-5" tabindex="-1"></a>    <span class="at">alpha =</span> <span class="fl">0.8</span>,</span>
+<span id="cb13-6"><a href="c.elegans-plate-experiment.html#cb13-6" tabindex="-1"></a>    <span class="at">position =</span> <span class="fu">position_jitter</span>(<span class="at">width =</span> <span class="fl">0.15</span>)</span>
+<span id="cb13-7"><a href="c.elegans-plate-experiment.html#cb13-7" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="c.elegans-plate-experiment.html#cb13-8" tabindex="-1"></a>  <span class="fu">labs</span>(</span>
+<span id="cb13-9"><a href="c.elegans-plate-experiment.html#cb13-9" tabindex="-1"></a>    <span class="at">title =</span> <span class="st">&quot;Normalized C. elegans Response&quot;</span>,</span>
+<span id="cb13-10"><a href="c.elegans-plate-experiment.html#cb13-10" tabindex="-1"></a>    <span class="at">caption =</span> <span class="st">&quot;Data normalized to controlNegative (mean = 1)&quot;</span>,</span>
+<span id="cb13-11"><a href="c.elegans-plate-experiment.html#cb13-11" tabindex="-1"></a>    <span class="at">x =</span> <span class="st">&quot;log10(Compound Concentration) [nM]&quot;</span>,</span>
+<span id="cb13-12"><a href="c.elegans-plate-experiment.html#cb13-12" tabindex="-1"></a>    <span class="at">y =</span> <span class="st">&quot;Normalized Raw Data&quot;</span></span>
+<span id="cb13-13"><a href="c.elegans-plate-experiment.html#cb13-13" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb13-14"><a href="c.elegans-plate-experiment.html#cb13-14" tabindex="-1"></a>  <span class="fu">scale_color_brewer</span>(<span class="at">palette =</span> <span class="st">&quot;Dark2&quot;</span>) <span class="sc">+</span></span>
+<span id="cb13-15"><a href="c.elegans-plate-experiment.html#cb13-15" tabindex="-1"></a>  <span class="fu">theme_minimal</span>() <span class="sc">+</span></span>
+<span id="cb13-16"><a href="c.elegans-plate-experiment.html#cb13-16" tabindex="-1"></a>  <span class="fu">theme</span>(<span class="at">axis.text.x =</span> <span class="fu">element_text</span>(<span class="at">angle =</span> <span class="dv">45</span>, <span class="at">hjust =</span> <span class="dv">1</span>))</span></code></pre></div>
 <pre><code>## Warning: Removed 5 rows containing missing values or values outside the scale range (`geom_point()`).</code></pre>
 <p><img src="_main_files/figure-html/normalised%20plot-1.png" width="672" /></p>
 </div>
@@ -371,42 +379,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": null,
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
 });
 });
 </script>

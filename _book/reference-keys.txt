@@ -3,6 +3,11 @@ contact
 curriculum-vitae-wing-kien-alex-sung
 looking-ahead
 guerilla-analytics
+tasks
+reorganize-your-daur-ii-project
+data-folders-should-contain
+apply-to-your-rnaseq-and-metagenomics-work
+use-the-fs-package-to-generate-a-folder-tree-screenshot
 c.elegans-plate-experiment
 exploring-the-excel-dataset-structure
 importing-the-dataset-into-r

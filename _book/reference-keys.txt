@@ -2,7 +2,6 @@ introduction
 contact
 curriculum-vitae-wing-kien-alex-sung
 looking-ahead
-professional-development
 guerilla-analytics
 c.elegans-plate-experiment
 reproducable-research-part-1

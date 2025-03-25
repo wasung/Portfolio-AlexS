@@ -53,3 +53,5 @@ Step-wise plan (need to make)
 
 *Question K Normalize the data for the controlNegative in such a way that the mean value for controlNegative is exactly equal to 1 and that all other values are expressed as a fraction thereof. Rerun your graphs with the normalized data. Why would you want to take this step?*
 It makes it easier to compare relative changes across different conditions and facilitates the interpretation of treatment effects.
+
+Lets test if this works

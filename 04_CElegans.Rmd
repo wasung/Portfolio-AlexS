@@ -1,57 +1,130 @@
-# C.Elegans Plate experiment
+# C.elegans Plate Experiment
 
-*Question A: "Review the following Excel file in the ./data/CE.LIQ.FLOW.062_Tidydata.xlsx, by opening the file in Excel. See if you can spot anything peculiar about this file. Do not edit the file in any way. Just close it when you are done. (Annoyingly, Excel asks you to save your changes, even if you did not touch anything in the file.)"*
-A: Parameters tab is unclear what colomn means what. There is a 'Raw data' column, what does this mean and what is it for? Also would be nice to have some explanation on all the colours and why does the pink column run down so far. The other tabs are even more unclear its hard to find where things are and even more hard to find what it means.
+---
 
-*Question B: "Open the file in R, using the {readxl} package."*
-*Question C: "Inspect the data types of columns RawData, compName and compConcentration. What types would you expect from the experimental description above. Have the data types been correctly assigned during the importing of the data into R?"*
+## Exploring the Excel Dataset Structure
 
-C:
-```{r ReadXL}
-library("here")
-library(tidyverse)
+**"Review the following Excel file in `./data/CE.LIQ.FLOW.062_Tidydata.xlsx`..."**
+
+The **Parameters** tab is unclear — it's difficult to interpret what each column means. The **Raw Data** column lacks explanation, and the purpose of the coloring (particularly the long pink section) is not described. Other tabs are even more confusing due to minimal labeling and inconsistent formatting.
+
+---
+
+## Importing the Dataset into R
+
+**"Open the file in R using the `{readxl}` package."**
+
+```{r import-data, message=FALSE, warning=FALSE}
+library(here)
 library(readxl)
+library(tidyverse)
 
-
+# Import data
 CElegans_data <- read_excel(here::here("Data", "CE.LIQ.FLOW.062_Tidydata.xlsx"))
 
+# Preview
 head(CElegans_data)
 ```
+## Checking and Correcting Data Types
 
-*Question D:"Create a graph displaying a scatterplot for the CE.LIQ.FLOW.062_Tidydata.xlsx data, for the different compounds and the varying concentrations. Put the compConcentration on the x-axis, the DataRaw counts on the y-axis and assign a colour to each level in compName. Assign a different symbol (shape =) to each level in the expType variable. Try fixing the labels of the x-axis so that we can read them."*
+compConcentration was imported as character and was converted to numeric. compName and expType were converted to factors to allow proper grouping and visualization.
+
+```{r inspect data}
+# Inspect column types
+str(CElegans_data %>% select(RawData, compName, compConcentration))
+
+# Convert data types as needed
+CElegans_data$compName <- factor(CElegans_data$compName, levels = unique(CElegans_data$compName))
+CElegans_data$expType <- factor(CElegans_data$expType, levels = unique(CElegans_data$expType))
+CElegans_data$compConcentration <- parse_number(CElegans_data$compConcentration)
+
+# Confirm conversion
+str(CElegans_data %>% select(RawData, compName, compConcentration, expType))
+```
+## Visualizing Raw Data: Scatterplot
 ```{r ggplot}
 library(ggplot2)
 library(tidyverse)
 
 
-# chr to factor conversion
-CElegans_data$compName <- factor(CElegans_data$compName, levels = unique(CElegans_data$compName))
-CElegans_data$expType <- factor(CElegans_data$expType, levels = unique(CElegans_data$expType))
-CElegans_data$compConcentration <- parse_number(CElegans_data$compConcentration)
-
-# checking the conversion to factor
-levels(CElegans_data$compName)
-levels(CElegans_data$expType)
-
-str(CElegans_data)
-
 # Plotting the scatterplot with dynamic shape assignment
 ggplot(CElegans_data, aes(x = log10(compConcentration), y = RawData)) +
-  geom_point(aes(color = compName, shape = expType), size = 1.5, alpha = 0.8, position = position_jitter(width = 0.15)) +
-  labs(title = "CE.LIQ", caption = "think of a caption",x = " Log10 Compound Concentration", y = "DataRaw Counts") +
+  geom_point(
+    aes(color = compName, shape = expType),
+    size = 1.5,
+    alpha = 0.8,
+    position = position_jitter(width = 0.15)
+  ) +
+  labs(
+    title = "C. elegans Response by Compound and Concentration",
+    caption = "Raw data colored by compound, shaped by experiment type",
+    x = "log10(Compound Concentration) [nM]",
+    y = "Raw Data (counts)"
+  ) +
+  scale_color_brewer(palette = "Dark2") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
+
 ```
-*Question E: "When creating the plot under C), what happened with the ordering of the x-axis labels. Explain why this happens. Look at the data-type of the compConcentration column in the data again to find a clue."*
-The x-axis labels overlap, you need to angle them slightly so all labels are readable.
 
-(G) The positive control for this experiments is controlPositive. (H) The negative control for this experiment is controlNegative.
+## Fixing Axis Label Issues in ggplot
+The compConcentration column was originally imported as a character variable, so ggplot2 treated it as a categorical (discrete) variable. This led to disorganized and overlapping axis labels. After converting it to numeric and applying log10(), the axis behaved as continuous, solving the issue.
 
-*Question I: Think about how you would analyze this experiment to learn whether there is indeed an effect of different concentrations on offspring count and whether the different compounds have a different curve (IC50). Write down you analysis as a step-wise plan.*
-Step-wise plan (need to make)
+## Identifying Positive Controls
+The positive control for this experiments is controlPositive.
 
-*Question K Normalize the data for the controlNegative in such a way that the mean value for controlNegative is exactly equal to 1 and that all other values are expressed as a fraction thereof. Rerun your graphs with the normalized data. Why would you want to take this step?*
-It makes it easier to compare relative changes across different conditions and facilitates the interpretation of treatment effects.
+## Identifying Negative Controls
+The negative control for this experiment is controlNegative.
 
-Lets test if this works
+## 	Designing a Statistical Analysis Strategy
+1) Import and clean the dataset
+2) Convert character columns to numeric or factor types
+3) Visualize raw data for trends by concentration and compound
+4) Normalize RawData against the mean of the controlNegative group
+5) Re-plot normalized data to observe relative trends
+6) Check normality using Shapiro-Wilk tests
+7) Run ANOVA to detect significant differences across groups
+8) Apply post hoc tests if ANOVA is significant (e.g., Tukey HSD)
+9) Fit dose-response models to estimate IC50 values
+10) Compare confidence intervals between IC50 estimates
+11) Interpret results for biological and statistical significance
+
+## Normalizing Data Using the Control Group
+
+**"Normalize the data for the controlNegative in such a way that the mean value for controlNegative is exactly equal to 1 and that all other values are expressed as a fraction thereof. Rerun your graphs with the normalized data."**
+
+```{r normalise data}
+# Calculate the mean for controlNegative
+neg_ctrl <- CElegans_data %>% filter(expType == "controlNegative")
+neg_mean <- mean(neg_ctrl$RawData)
+
+# Normalize the RawData
+CElegans_data <- CElegans_data %>%
+  mutate(Normalized = RawData / neg_mean)
+
+# Preview normalized data
+head(CElegans_data %>% select(compName, expType, compConcentration, RawData, Normalized))
+```
+
+```{r normalised plot}
+ggplot(CElegans_data, aes(x = log10(compConcentration), y = Normalized)) +
+  geom_point(
+    aes(color = compName, shape = expType),
+    size = 1.5,
+    alpha = 0.8,
+    position = position_jitter(width = 0.15)
+  ) +
+  labs(
+    title = "Normalized C. elegans Response",
+    caption = "Data normalized to controlNegative (mean = 1)",
+    x = "log10(Compound Concentration) [nM]",
+    y = "Normalized Raw Data"
+  ) +
+  scale_color_brewer(palette = "Dark2") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## 	Why Normalize?
+This normalization allows for clearer comparison of relative differences between conditions. By setting the control to 1, the effect size of each treatment becomes easier to interpret.

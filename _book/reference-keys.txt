@@ -2,9 +2,18 @@ introduction
 contact
 curriculum-vitae-wing-kien-alex-sung
 looking-ahead
-professional-development
 guerilla-analytics
 c.elegans-plate-experiment
+exploring-the-excel-dataset-structure
+importing-the-dataset-into-r
+checking-and-correcting-data-types
+visualizing-raw-data-scatterplot
+fixing-axis-label-issues-in-ggplot
+identifying-positive-controls
+identifying-negative-controls
+designing-a-statistical-analysis-strategy
+normalizing-data-using-the-control-group
+why-normalize
 reproducable-research-part-1
 heterologous-prime-boost-immunisation-with-mrna--and-adc68-based-2019-ncov-variant-vaccines-induces-broad-spectrum-immune-responses-in-mice
 study-purpose
@@ -13,3 +22,5 @@ ethics-statement
 funding-statement
 data-availability-statement-and-location
 estimating-the-effects-of-non-pharmaceutical-interventions-on-covid-19-in-europe
+relational-databases
+creating-r-package

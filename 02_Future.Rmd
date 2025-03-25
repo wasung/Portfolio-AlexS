@@ -1,10 +1,21 @@
-# Looking ahead
-In the future I probably want to work in consulting. I am still highly interested in the life science sector but want to be involved in other sides of the sector. I feel like doing the data science course is something I did because I feel like its a valuable hardskill to have as I am still considering working in finance or BI. In this field its good to already have knowledge in data workflows and analysis.
+# Looking Ahead
 
-## Professional development
-To reach these goals I have a long way to go and a lot to learn in and outside of my educational carreer. During the DSFB course we are free to work on a datascience or bioinformatics related skill. For this I am probably looking at BI or python since this aligns most with what I want in my carreer.
+My academic journey began with a fascination for molecular biology, but over time, I’ve found myself drawn to a broader vision of how I want to contribute to the life sciences sector. Rather than remaining solely in the laboratory, I’m increasingly motivated by the idea of playing a more strategic role—where science, data, and business come together to create real-world impact. I want to be involved in designing solutions, informing decisions, and shaping the direction of healthcare innovations, particularly in fields where science meets patient outcomes and commercial viability.
 
-For my internship I am mainly looking at sequencing companies, they do both short and long read, but since I dont have any experience with short read sequencing I want to learn more about it. (DNA short read illumna?), variant calling.
-For variant calling I am currently looking at 
-- Variant tools (conda install in R)
-I will first work through a tutorial and after that will work with a paper dataset.
+To support this shift, I chose to pursue the *Data Science for Biology* minor alongside my Bachelor’s in Life Sciences. This combination reflects my desire to bridge hard scientific knowledge with analytical and business-oriented thinking. I believe that fluency in data—whether it’s understanding experimental design, visualizing trends, or interpreting statistical outcomes—is a crucial skill in almost any role across life sciences, biotech, and healthcare consulting. From my perspective, knowing how to work with data empowers you to be not just a practitioner, but also a decision-maker.
+
+While my initial goal was to find an internship specifically focused on data science or sequencing, I ultimately accepted a position at a **cell and gene therapy facility**—an opportunity that has proven both challenging and eye-opening. Working in this highly regulated environment has taught me a great deal about Good Manufacturing Practice (GMP), cleanroom operations, and contamination control strategies. I’ve been involved in environmental monitoring and performance qualification (PQ) processes, all of which have given me a deeper appreciation for the complexities of translating research into safe, scalable therapies. While this internship doesn’t involve coding or computational analysis directly, it’s reinforcing my understanding of the operational and regulatory backbone of modern therapeutics—something I consider just as important.
+
+Looking further ahead, I see **strategy consulting** as the most likely next step in my career. I’m especially interested in specializing within the **healthcare and life sciences sector**, where I can apply my background to strategic challenges in pharma, biotech, or health tech. However, I remain open and excited to explore other industries as well, particularly during the early stages of my consulting journey. I value the opportunity to learn across a wide range of business contexts and expand my thinking beyond my academic background.
+
+To prepare for this next phase, I’ve applied to the **pre-master programme at Erasmus University Rotterdam**, with the goal of continuing on to a **Master in Management**. This academic step will allow me to deepen my understanding of business, strategy, and organizational dynamics, and will complement the technical and scientific knowledge I’ve built during my Life Sciences degree.
+
+In short, I’m still evolving as a professional, but I’m actively shaping my own trajectory. I’m seeking out the tools, experiences, and mindsets that will help me grow—and I’m committed to building a career that blends the depth of science with the breadth of strategy.
+
+## Professional Development {-}
+
+As part of the *Data Science for Biology* course, we are allocated time to independently explore a bioinformatics-related topic of our choice. I’ve chosen to focus on **variant calling**, specifically using the **Variant Tools** package available via Conda, as this aligns with my interest in genomics and data-driven biological insights. I plan to apply these skills in a self-directed project using a publicly available dataset, allowing me to gain hands-on experience beyond the classroom or lab setting. 
+
+Outside of this academic framework, I’m continuing to build up my data skills independently. I’ve been exploring tools like **Power BI** to strengthen my business intelligence capabilities, and I'm actively learning more about **Python for data analysis**. 
+
+I believe that by combining my scientific background with growing analytical and technical expertise, I’ll be well-positioned for cross-disciplinary roles — whether in consulting, biotech strategy, or data-driven innovation within the healthcare sector.

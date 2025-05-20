@@ -5,6 +5,11 @@ Xingxing Li, Jingjing Liu, Wenjuan Li, Qinhua Peng, Miao Li, Zhifang Ying, Zelun
 
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10050358/ (add reference later)
 
+Add research question
+Add summary methode en resultaten
+
+#Reproducable research part 2
+
 ### Study purpose
 There was no concise statement in the introduction of the article, that established the reason the research was conducted.
 
@@ -20,7 +25,7 @@ There is no section on fundings, however there is a section on acknowledgements.
 ### Data availability statement and location
 There is a small section where supplementary materials can be accessed. THere is a download link to the 'data sheet'. The sheet is a word doc with the processed data in figures in a doc file. Access to raw data would be better to have. It does however mention that you can inquire for more data but it requires you to contact the authors but, there is no author contact info available. Furthermore no code was used for this research.
 
-#Reproducable research part 2
+#Reproducable research part 3
 
 ## Estimating the effects of non-pharmaceutical interventions on COVID-19 in Europe
 (https://www.nature.com/articles/s41586-020-2405-7)
@@ -50,7 +55,7 @@ library(cowplot)
 library(ggplot2)
 library(abind)
 
-source('nature/utils/process-covariates.r')
+source('~/Portfolio-AlexS/ReproducibleArticleFiles/process-covariates.r')
 
 # Commandline options and parsing
 parser <- OptionParser()
@@ -95,14 +100,14 @@ cat(sprintf("Running:\nStanModel = %s\nDebug: %s\n",
             StanModel,DEBUG))
 
 # Read which countires to use
-countries <- readRDS('nature/data/regions.rds')
+countries <- readRDS('~/Portfolio-AlexS/ReproducibleArticleFiles/regions.rds')
 # Read deaths data for regions
-d <- readRDS('nature/data/COVID-19-up-to-date.rds')
+d <- readRDS('~/Portfolio-AlexS/ReproducibleArticleFiles/COVID-19-up-to-date.rds')
 # Read IFR and pop by country
-ifr.by.country <- readRDS('nature/data/popt-ifr.rds')
+ifr.by.country <- readRDS('~/Portfolio-AlexS/ReproducibleArticleFiles/popt-ifr.rds')
 
 # Read interventions
-interventions <- readRDS('nature/data/interventions.rds')
+interventions <- readRDS('~/Portfolio-AlexS/ReproducibleArticleFiles/interventions.rds')
 
 forecast <- 0 # increase to get correct number of days to simulate
 # Maximum number of days to simulate
@@ -117,7 +122,7 @@ deaths_by_country = processed_data$deaths_by_country
 reported_cases = processed_data$reported_cases
 options(mc.cores = parallel::detectCores())
 rstan_options(auto_write = TRUE)
-m = stan_model(paste0('nature/stan-models/',StanModel,'.stan'))
+m = stan_model(paste0('~/Portfolio-AlexS/ReproducibleArticleFiles/',StanModel,'.stan'))
 
 if(DEBUG) {
   fit = sampling(m,data=stan_data,iter=40,warmup=20,chains=2)

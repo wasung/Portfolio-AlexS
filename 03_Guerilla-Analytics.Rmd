@@ -10,8 +10,6 @@ The focus is on organizing both:
 
 ---
 
-## Tasks
-
 ### 1. **Reorganize Your DAUR-II Project**
 
 - Locate your RStudio project folder used for the **DAUR-II assignments**.

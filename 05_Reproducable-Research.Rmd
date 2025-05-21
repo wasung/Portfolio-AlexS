@@ -143,7 +143,7 @@ if(JOBID == "")
 print(sprintf("Jobid = %s",JOBID))
 
 countries <- countries$Regions
-save(fit,prediction,dates,reported_cases,deaths_by_country,countries,estimated.deaths,estimated.deaths.cf,stan_data, file=paste0('nature/results/',StanModel,'-',JOBID,'-stanfit.Rdata'))
+save(fit,prediction,dates,reported_cases,deaths_by_country,countries,estimated.deaths,estimated.deaths.cf,stan_data, file=paste0('~/Portfolio-AlexS/ReproducibleArticleFiles/Results/',StanModel,'-',JOBID,'-stanfit.Rdata'))
 
 
 library(bayesplot)
@@ -153,23 +153,24 @@ print('Generating mu, rt plots')
 mu = (as.matrix(out$mu))
 colnames(mu) = countries
 g = (mcmc_intervals(mu,prob = .9))
-ggsave(sprintf("nature/figures/%s-mu.png",filename),g,width=4,height=6)
+ggsave(sprintf("~/Portfolio-AlexS/ReproducibleArticleFiles/%s-mu.png",filename),g,width=4,height=6)
 tmp = lapply(1:length(countries), function(i) (out$Rt_adj[,stan_data$N[i],i]))
 Rt_adj = do.call(cbind,tmp)
 colnames(Rt_adj) = countries
 g = (mcmc_intervals(Rt_adj,prob = .9))
-ggsave(sprintf("nature/figures/%s-final-rt.png",filename),g,width=4,height=6)
+ggsave(sprintf("~/Portfolio-AlexS/ReproducibleArticleFiles/%s-final-rt.png",filename),g,width=4,height=6)
 
 print("Generate 3-panel plots")
-source('nature/utils/plot-3-panel.r')
+source("~/Portfolio-AlexS/ReproducibleArticleFiles/plot-3-panel.r")
 make_three_panel_plot(filename)
 
 print('Covars plots')
-source('nature/utils/covariate-size-effects.r')
+source('~/Portfolio-AlexS/ReproducibleArticleFiles/covariate-size-effects.r')
 plot_covars(filename)
 
 print('Making table')
-source('nature/utils/make-table.r')
+source('~/Portfolio-AlexS/ReproducibleArticleFiles/make-table.r')
 make_table(filename)
+
 ```
 

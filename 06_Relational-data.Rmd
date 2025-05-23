@@ -1,1 +1,2 @@
 # Relational databases
+Passed the SQL assesment in Period D of academic year of 2023/2024

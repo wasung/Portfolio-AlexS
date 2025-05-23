@@ -1,1 +1,100 @@
-#Variant Calling
+# Variant Analysis tools
+
+## Summary personal Timeline and Motivation
+
+My initial plan was to perform a comprehensive comparison between `vcfR`, `VariantAnnotation`, and `VariantTools`. However, this proved impractical due to incompatible input requirements (VCF vs BAM). I dropped `VariantTools` from the initial comparison and refocused on filtering using `vcfR` and `VariantAnnotation`. My large VCF dataset crashed `vcfR`, while `VariantAnnotation` managed to process it. I attempted smaller datasets but faced issues with missing or poor quality scores. I experimented with `deepSNV` and `mitoClone2` for variant calling but encountered persistent file access errors. Revisited `VariantTools` for variant calling but was blocked by `gmapR`/`GSNAP` issues on Windows. Pivoted to using the `VariantAnnotation` tutorial dataset (chromosome 22) and compared it with `vcfR` for variant filtering.
+
+Throughout this process, my choices were guided by tool limitations, computational feasibility, and my evolving understanding of each package's strengths.
+
+## Background
+
+Variant calling is a crucial step in genomic analysis that involves identifying differences in DNA sequence compared to a reference genome. These variants can include single nucleotide polymorphisms (SNPs), insertions, deletions, and more. Accurate variant calling is essential for downstream applications such as disease gene discovery, pharmacogenomics, and population genetics.
+
+Several R packages are available for handling variant data, each with its own strengths and limitations:
+
+- **VariantAnnotation**: A comprehensive Bioconductor package that provides functionality for reading, annotating, and filtering VCF files. It's particularly strong in structured data handling and integration with annotation resources.
+- **vcfR**: Designed for fast and interactive VCF file exploration, especially useful for lightweight operations, visualization, and subsetting.
+- **VariantTools**: An end-to-end framework for variant calling and filtering directly from BAM files, integrated with Bioconductor's genomic data structures.
+- **deepSNV**: A package tailored to identifying low-frequency variants, particularly useful for ultra-deep sequencing data.
+- **mitoClone2**: A downstream tool based on deepSNV, focused on mitochondrial heteroplasmy and clonal lineage analysis.
+I initially set out to perform a three-way comparison between the R packages `VariantAnnotation`, `vcfR`, and `VariantTools`. My goal was to compare how these tools handled variant filtering, annotation, and representation. However, I quickly discovered that the input formats and assumptions across the packages were not aligned. `VariantTools` expects BAM files, while `vcfR` and `VariantAnnotation` work directly with VCFs. 
+
+Due to this, I explored `deepSNV`. Unfortunately, this failed due to file access issues when trying to extract base counts from BAM files:
+
+```r
+library(deepSNV)
+bam_list <- list(H1993 = "H1993.bam")
+tp53_region <- GenomicRanges::GRanges("chr17", IRanges(7565097, 7590856))
+counts <- baseCountsFromBamList(bamfiles = bam_list, sites = tp53_region)
+```
+
+This motivated me to try `mitoClone2`, which builds on `deepSNV`, but I encountered the same BAM access issues:
+
+```r
+library(mitoClone2)
+bam_list <- list(H1993 = "H1993.bam")
+tp53_region <- GenomicRanges::GRanges("chr17", IRanges(7565097, 7590856))
+counts <- baseCountsFromBamList(bamfiles = bam_list, sites = tp53_region)
+```
+
+Since both packages depend heavily on `deepSNV`’s functionality and required very specific BAM setups, I dropped them. However, I recognize that `deepSNV` is suitable for detecting low-frequency variants in ultra-deep sequencing, and `mitoClone2` would be well-suited for mitochondrial DNA analysis and clonal structure inference in single-cell data.
+
+Simultaneously, I explored using `VariantTools` again for variant calling. But I discovered that subsetting data with this package depends on `gmapR`, which in turn relies on `GSNAP`. This made it incompatible with Windows, making my plan to use a smaller subset of data infeasible within my current setup.
+
+Given the challenges with variant calling, I returned to my original idea of variant filtering. I aimed to compare `vcfR` and `VariantAnnotation` more thoroughly. I started with a large VCF file. `VariantAnnotation` could process it, but `vcfR` repeatedly crashed my system due to memory limitations:
+
+```r
+library(VariantAnnotation)
+vcf_obj <- readVcf("large_sample.vcf.gz", "hg38")
+rowRanges(vcf_obj)
+```
+
+```r
+library(vcfR)
+vcf <- read.vcfR("large_sample.vcf.gz")  # Crashed system
+```
+
+To deal with this, I shifted to a smaller dataset. Unfortunately, I then found that the data either had no QUAL scores or all values were below 30, making them unsuitable for quality-based filtering. I decided to pivot again to well-characterized, smaller datasets—specifically, those based on chromosomes 20 or 22, which are often used in tutorials due to their manageable size and representative features.
+
+I initially downloaded a chromosome 22 dataset, but it still proved too large. Eventually, I found that `VariantAnnotation` includes a built-in example dataset based on chromosome 22. This dataset allowed me to continue my comparison without crashing or compatibility issues.
+
+```r
+library(VariantAnnotation)
+fl <- system.file("extdata", "chr22.vcf.gz", package = "VariantAnnotation")
+vcf <- readVcf(fl, "hg19")
+summary(vcf)
+```
+
+This final adjustment allowed me to complete my comparative analysis between `vcfR` and `VariantAnnotation` effectively, using realistic and tractable data.
+
+
+
+
+
+
+## Discussion
+
+This project revealed both the power and the constraints of variant analysis tools in R. While my initial goals were ambitious, real-world file sizes, system constraints, and software compatibility forced me to adapt repeatedly.
+
+### What Went Well
+- Successfully explored multiple R packages and understood their input/output structures.
+- Managed to compare and visualize variant calls using `GenomicRanges`, even without full pipeline compatibility.
+- Gained valuable insights into what tools are realistic to run on a typical local setup.
+
+### What Didn't Work
+- `deepSNV` and `mitoClone2` failed due to BAM access issues and setup requirements.
+- `VariantTools`' reliance on `gmapR` made it unusable on Windows.
+- Large datasets were infeasible to process with `vcfR` due to memory limits.
+
+
+## Conclusion and Recommendations
+
+Based on my experience:
+
+- **Use `vcfR`** for quick, small-scale variant filtering and visualization. It’s great for exploratory analysis but not built for large files.
+- **Use `VariantAnnotation`** for structured, reproducible workflows and integration with annotation databases. It handles large files more gracefully and provides robust filtering tools.
+- **Avoid `VariantTools`** on Windows unless working in a Unix-based environment with GSNAP installed.
+- **Avoid `deepSNV` and `mitoClone2`** unless you have a very specific need for ultra-deep sequencing or mitochondrial variant analysis and your environment is set up accordingly.
+
+This project has been a challenging but rewarding exploration of the practicalities behind variant analysis in R. It highlighted the importance of choosing tools that align with both data and computing resources.
+

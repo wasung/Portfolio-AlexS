@@ -25,3 +25,4 @@ countReads <- function(bam_files, txdb, ignore_strand=TRUE, single_end=TRUE,
   )
   return(se)
 }
+

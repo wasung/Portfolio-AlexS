@@ -2,9 +2,6 @@
 title: "Portfolio DSFB"
 site: bookdown::bookdown_site
 documentclass: book
-output:
-  bookdown::gitbook: default
-  #bookdown::pdf_book: default
 ---
 
 # Introduction
@@ -13,4 +10,5 @@ welcome to my Data Science for Biology portfolio! My name is Alex Sung, and I am
 
 ## Contact 
 - email: wkasung@gmail.com
-- github: does it update?
+- GitHub: [https://github.com/wasung](https://github.com/wasung)
+

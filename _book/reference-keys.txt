@@ -3,7 +3,6 @@ contact
 curriculum-vitae-wing-kien-alex-sung
 looking-ahead
 guerilla-analytics
-tasks
 reorganize-your-daur-ii-project
 data-folders-should-contain
 apply-to-your-rnaseq-and-metagenomics-work
@@ -29,3 +28,10 @@ data-availability-statement-and-location
 estimating-the-effects-of-non-pharmaceutical-interventions-on-covid-19-in-europe
 relational-databases
 creating-r-package
+variant-analysis-tools
+summary-personal-timeline-and-motivation
+background
+discussion
+what-went-well
+what-didnt-work
+conclusion-and-recommendations

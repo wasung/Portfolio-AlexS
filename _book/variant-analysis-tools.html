@@ -4,18 +4,18 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>4 Guerilla Analytics | Portfolio DSFB</title>
-  <meta name="description" content="4 Guerilla Analytics | Portfolio DSFB" />
+  <title>9 Variant Analysis tools | Portfolio DSFB</title>
+  <meta name="description" content="9 Variant Analysis tools | Portfolio DSFB" />
   <meta name="generator" content="bookdown 0.42 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="4 Guerilla Analytics | Portfolio DSFB" />
+  <meta property="og:title" content="9 Variant Analysis tools | Portfolio DSFB" />
   <meta property="og:type" content="book" />
   
   
   
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="4 Guerilla Analytics | Portfolio DSFB" />
+  <meta name="twitter:title" content="9 Variant Analysis tools | Portfolio DSFB" />
   
   
   
@@ -28,8 +28,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="looking-ahead.html"/>
-<link rel="next" href="c.elegans-plate-experiment.html"/>
+<link rel="prev" href="creating-r-package.html"/>
+
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -210,90 +210,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="guerilla-analytics" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">4</span> Guerilla Analytics<a href="guerilla-analytics.html#guerilla-analytics" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>Need to run the data at home through the pipe and clean up the folders still ( will use projecticum folders).
-## Assignment Overview</p>
-<p>In this assignment, the goal is to apply the <strong>Guerrilla Analytics</strong> framework to structure and document your project in a reproducible, collaborative, and future-proof way.</p>
-<p>The focus is on organizing both:
-- The <strong>DAUR-II</strong> project (RNAseq &amp; metagenomics analysis), and
-- The <strong>Projecticum</strong> (ongoing group project in DSFB2)</p>
-<hr />
-<div id="reorganize-your-daur-ii-project" class="section level3 hasAnchor" number="4.0.1">
-<h3><span class="header-section-number">4.0.1</span> 1. <strong>Reorganize Your DAUR-II Project</strong><a href="guerilla-analytics.html#reorganize-your-daur-ii-project" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="variant-analysis-tools" class="section level1 hasAnchor" number="9">
+<h1><span class="header-section-number">9</span> Variant Analysis tools<a href="variant-analysis-tools.html#variant-analysis-tools" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="summary-personal-timeline-and-motivation" class="section level2 hasAnchor" number="9.1">
+<h2><span class="header-section-number">9.1</span> Summary personal Timeline and Motivation<a href="variant-analysis-tools.html#summary-personal-timeline-and-motivation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>My initial plan was to perform a comprehensive comparison between <code>vcfR</code>, <code>VariantAnnotation</code>, and <code>VariantTools</code>. However, this proved impractical due to incompatible input requirements (VCF vs BAM). I dropped <code>VariantTools</code> from the initial comparison and refocused on filtering using <code>vcfR</code> and <code>VariantAnnotation</code>. My large VCF dataset crashed <code>vcfR</code>, while <code>VariantAnnotation</code> managed to process it. I attempted smaller datasets but faced issues with missing or poor quality scores. I experimented with <code>deepSNV</code> and <code>mitoClone2</code> for variant calling but encountered persistent file access errors. Revisited <code>VariantTools</code> for variant calling but was blocked by <code>gmapR</code>/<code>GSNAP</code> issues on Windows. Pivoted to using the <code>VariantAnnotation</code> tutorial dataset (chromosome 22) and compared it with <code>vcfR</code> for variant filtering.</p>
+<p>Throughout this process, my choices were guided by tool limitations, computational feasibility, and my evolving understanding of each package’s strengths.</p>
+</div>
+<div id="background" class="section level2 hasAnchor" number="9.2">
+<h2><span class="header-section-number">9.2</span> Background<a href="variant-analysis-tools.html#background" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Variant calling is a crucial step in genomic analysis that involves identifying differences in DNA sequence compared to a reference genome. These variants can include single nucleotide polymorphisms (SNPs), insertions, deletions, and more. Accurate variant calling is essential for downstream applications such as disease gene discovery, pharmacogenomics, and population genetics.</p>
+<p>Several R packages are available for handling variant data, each with its own strengths and limitations:</p>
 <ul>
-<li>Locate RStudio project folder used for the <strong>DAUR-II assignments</strong>.</li>
-<li>Download your work without the heavy data files</li>
-<li>Restructure the folder according to the Guerrilla Analytics folder principles</li>
+<li><strong>VariantAnnotation</strong>: A comprehensive Bioconductor package that provides functionality for reading, annotating, and filtering VCF files. It’s particularly strong in structured data handling and integration with annotation resources.</li>
+<li><strong>vcfR</strong>: Designed for fast and interactive VCF file exploration, especially useful for lightweight operations, visualization, and subsetting.</li>
+<li><strong>VariantTools</strong>: An end-to-end framework for variant calling and filtering directly from BAM files, integrated with Bioconductor’s genomic data structures.</li>
+<li><strong>deepSNV</strong>: A package tailored to identifying low-frequency variants, particularly useful for ultra-deep sequencing data.</li>
+<li><strong>mitoClone2</strong>: A downstream tool based on deepSNV, focused on mitochondrial heteroplasmy and clonal lineage analysis.
+I initially set out to perform a three-way comparison between the R packages <code>VariantAnnotation</code>, <code>vcfR</code>, and <code>VariantTools</code>. My goal was to compare how these tools handled variant filtering, annotation, and representation. However, I quickly discovered that the input formats and assumptions across the packages were not aligned. <code>VariantTools</code> expects BAM files, while <code>vcfR</code> and <code>VariantAnnotation</code> work directly with VCFs.</li>
 </ul>
-<div id="data-folders-should-contain" class="section level4 hasAnchor" number="4.0.1.1">
-<h4><span class="header-section-number">4.0.1.1</span> Data folders should contain:<a href="guerilla-analytics.html#data-folders-should-contain" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Due to this, I explored <code>deepSNV</code>. Unfortunately, this failed due to file access issues when trying to extract base counts from BAM files:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="variant-analysis-tools.html#cb16-1" tabindex="-1"></a><span class="fu">library</span>(deepSNV)</span>
+<span id="cb16-2"><a href="variant-analysis-tools.html#cb16-2" tabindex="-1"></a>bam_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">H1993 =</span> <span class="st">&quot;H1993.bam&quot;</span>)</span>
+<span id="cb16-3"><a href="variant-analysis-tools.html#cb16-3" tabindex="-1"></a>tp53_region <span class="ot">&lt;-</span> GenomicRanges<span class="sc">::</span><span class="fu">GRanges</span>(<span class="st">&quot;chr17&quot;</span>, <span class="fu">IRanges</span>(<span class="dv">7565097</span>, <span class="dv">7590856</span>))</span>
+<span id="cb16-4"><a href="variant-analysis-tools.html#cb16-4" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">baseCountsFromBamList</span>(<span class="at">bamfiles =</span> bam_list, <span class="at">sites =</span> tp53_region)</span></code></pre></div>
+<p>This motivated me to try <code>mitoClone2</code>, which builds on <code>deepSNV</code>, but I encountered the same BAM access issues:</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="variant-analysis-tools.html#cb17-1" tabindex="-1"></a><span class="fu">library</span>(mitoClone2)</span>
+<span id="cb17-2"><a href="variant-analysis-tools.html#cb17-2" tabindex="-1"></a>bam_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">H1993 =</span> <span class="st">&quot;H1993.bam&quot;</span>)</span>
+<span id="cb17-3"><a href="variant-analysis-tools.html#cb17-3" tabindex="-1"></a>tp53_region <span class="ot">&lt;-</span> GenomicRanges<span class="sc">::</span><span class="fu">GRanges</span>(<span class="st">&quot;chr17&quot;</span>, <span class="fu">IRanges</span>(<span class="dv">7565097</span>, <span class="dv">7590856</span>))</span>
+<span id="cb17-4"><a href="variant-analysis-tools.html#cb17-4" tabindex="-1"></a>counts <span class="ot">&lt;-</span> <span class="fu">baseCountsFromBamList</span>(<span class="at">bamfiles =</span> bam_list, <span class="at">sites =</span> tp53_region)</span></code></pre></div>
+<p>Since both packages depend heavily on <code>deepSNV</code>’s functionality and required very specific BAM setups, I dropped them. However, I recognize that <code>deepSNV</code> is suitable for detecting low-frequency variants in ultra-deep sequencing, and <code>mitoClone2</code> would be well-suited for mitochondrial DNA analysis and clonal structure inference in single-cell data.</p>
+<p>Simultaneously, I explored using <code>VariantTools</code> again for variant calling. But I discovered that subsetting data with this package depends on <code>gmapR</code>, which in turn relies on <code>GSNAP</code>. This made it incompatible with Windows, making my plan to use a smaller subset of data infeasible within my current setup.</p>
+<p>Given the challenges with variant calling, I returned to my original idea of variant filtering. I aimed to compare <code>vcfR</code> and <code>VariantAnnotation</code> more thoroughly. I started with a large VCF file. <code>VariantAnnotation</code> could process it, but <code>vcfR</code> repeatedly crashed my system due to memory limitations:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="variant-analysis-tools.html#cb18-1" tabindex="-1"></a><span class="fu">library</span>(VariantAnnotation)</span>
+<span id="cb18-2"><a href="variant-analysis-tools.html#cb18-2" tabindex="-1"></a>vcf_obj <span class="ot">&lt;-</span> <span class="fu">readVcf</span>(<span class="st">&quot;large_sample.vcf.gz&quot;</span>, <span class="st">&quot;hg38&quot;</span>)</span>
+<span id="cb18-3"><a href="variant-analysis-tools.html#cb18-3" tabindex="-1"></a><span class="fu">rowRanges</span>(vcf_obj)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="variant-analysis-tools.html#cb19-1" tabindex="-1"></a><span class="fu">library</span>(vcfR)</span>
+<span id="cb19-2"><a href="variant-analysis-tools.html#cb19-2" tabindex="-1"></a>vcf <span class="ot">&lt;-</span> <span class="fu">read.vcfR</span>(<span class="st">&quot;large_sample.vcf.gz&quot;</span>)  <span class="co"># Crashed system</span></span></code></pre></div>
+<p>To deal with this, I shifted to a smaller dataset. Unfortunately, I then found that the data either had no QUAL scores or all values were below 30, making them unsuitable for quality-based filtering. I decided to pivot again to well-characterized, smaller datasets—specifically, those based on chromosomes 20 or 22, which are often used in tutorials due to their manageable size and representative features.</p>
+<p>I initially downloaded a chromosome 22 dataset, but it still proved too large. Eventually, I found that <code>VariantAnnotation</code> includes a built-in example dataset based on chromosome 22. This dataset allowed me to continue my comparison without crashing or compatibility issues.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="variant-analysis-tools.html#cb20-1" tabindex="-1"></a><span class="fu">library</span>(VariantAnnotation)</span>
+<span id="cb20-2"><a href="variant-analysis-tools.html#cb20-2" tabindex="-1"></a>fl <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;extdata&quot;</span>, <span class="st">&quot;chr22.vcf.gz&quot;</span>, <span class="at">package =</span> <span class="st">&quot;VariantAnnotation&quot;</span>)</span>
+<span id="cb20-3"><a href="variant-analysis-tools.html#cb20-3" tabindex="-1"></a>vcf <span class="ot">&lt;-</span> <span class="fu">readVcf</span>(fl, <span class="st">&quot;hg19&quot;</span>)</span>
+<span id="cb20-4"><a href="variant-analysis-tools.html#cb20-4" tabindex="-1"></a><span class="fu">summary</span>(vcf)</span></code></pre></div>
+<p>This final adjustment allowed me to complete my comparative analysis between <code>vcfR</code> and <code>VariantAnnotation</code> effectively, using realistic and tractable data.</p>
+</div>
+<div id="discussion" class="section level2 hasAnchor" number="9.3">
+<h2><span class="header-section-number">9.3</span> Discussion<a href="variant-analysis-tools.html#discussion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>This project revealed both the power and the constraints of variant analysis tools in R. While my initial goals were ambitious, real-world file sizes, system constraints, and software compatibility forced me to adapt repeatedly.</p>
+<div id="what-went-well" class="section level3 hasAnchor" number="9.3.1">
+<h3><span class="header-section-number">9.3.1</span> What Went Well<a href="variant-analysis-tools.html#what-went-well" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <ul>
-<li>Only a <code>README.txt</code> file</li>
-<li>The <code>README.txt</code> should include:
-<ul>
-<li>Description of the dataset</li>
-<li>Data format</li>
-<li>Where the data is stored (path or location)</li>
-<li>Any preprocessing steps or notes</li>
-</ul></li>
+<li>Successfully explored multiple R packages and understood their input/output structures.</li>
+<li>Managed to compare and visualize variant calls using <code>GenomicRanges</code>, even without full pipeline compatibility.</li>
+<li>Gained valuable insights into what tools are realistic to run on a typical local setup.</li>
 </ul>
-<hr />
+</div>
+<div id="what-didnt-work" class="section level3 hasAnchor" number="9.3.2">
+<h3><span class="header-section-number">9.3.2</span> What Didn’t Work<a href="variant-analysis-tools.html#what-didnt-work" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ul>
+<li><code>deepSNV</code> and <code>mitoClone2</code> failed due to BAM access issues and setup requirements.</li>
+<li><code>VariantTools</code>’ reliance on <code>gmapR</code> made it unusable on Windows.</li>
+<li>Large datasets were infeasible to process with <code>vcfR</code> due to memory limits.</li>
+</ul>
 </div>
 </div>
-<div id="apply-to-your-rnaseq-and-metagenomics-work" class="section level3 hasAnchor" number="4.0.2">
-<h3><span class="header-section-number">4.0.2</span> 2. <strong>Apply to Your RNAseq and Metagenomics Work</strong><a href="guerilla-analytics.html#apply-to-your-rnaseq-and-metagenomics-work" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>You previously worked with:</p>
+<div id="conclusion-and-recommendations" class="section level2 hasAnchor" number="9.4">
+<h2><span class="header-section-number">9.4</span> Conclusion and Recommendations<a href="variant-analysis-tools.html#conclusion-and-recommendations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Based on my experience:</p>
 <ul>
-<li><strong>3 RNAseq datasets</strong>
-<ul>
-<li>One of them was the <strong>exam project</strong></li>
-</ul></li>
-<li><strong>2 Metagenomics datasets</strong></li>
+<li><strong>Use <code>vcfR</code></strong> for quick, small-scale variant filtering and visualization. It’s great for exploratory analysis but not built for large files.</li>
+<li><strong>Use <code>VariantAnnotation</code></strong> for structured, reproducible workflows and integration with annotation databases. It handles large files more gracefully and provides robust filtering tools.</li>
+<li><strong>Avoid <code>VariantTools</code></strong> on Windows unless working in a Unix-based environment with GSNAP installed.</li>
+<li><strong>Avoid <code>deepSNV</code> and <code>mitoClone2</code></strong> unless you have a very specific need for ultra-deep sequencing or mitochondrial variant analysis and your environment is set up accordingly.</li>
 </ul>
-<p>For each dataset:
-- Create a <strong>modular folder</strong> (e.g., <code>Data001</code>, <code>Data002</code>, etc.)
-- Add a <code>README.txt</code> inside each module
-- Add any import or checksum scripts to a <code>supporting/</code> subfolder</p>
-<hr />
-</div>
-<div id="use-the-fs-package-to-generate-a-folder-tree-screenshot" class="section level3 hasAnchor" number="4.0.3">
-<h3><span class="header-section-number">4.0.3</span> 3. <strong>Use the <code>{fs}</code> Package to Generate a Folder Tree Screenshot</strong><a href="guerilla-analytics.html#use-the-fs-package-to-generate-a-folder-tree-screenshot" class="anchor-section" aria-label="Anchor link to header"></a></h3>
-<p>To showcase your new project structure:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="guerilla-analytics.html#cb1-1" tabindex="-1"></a><span class="fu">library</span>(fs)</span>
-<span id="cb1-2"><a href="guerilla-analytics.html#cb1-2" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="guerilla-analytics.html#cb1-3" tabindex="-1"></a><span class="co"># Print your current directory tree (recursively)</span></span>
-<span id="cb1-4"><a href="guerilla-analytics.html#cb1-4" tabindex="-1"></a><span class="fu">dir_tree</span>(<span class="st">&quot;guerrilla-project&quot;</span>, <span class="at">recurse =</span> <span class="cn">TRUE</span>)</span></code></pre></div>
-<pre><code>## guerrilla-project
-## ├── 0_admin
-## │   └── README.md
-## ├── 1_data_raw
-## │   ├── Data001
-## │   │   ├── 2024-01-01_cleanroom_counts.csv
-## │   │   ├── 2024-01-01_md5sum_cleanroom_counts.md5
-## │   │   ├── README.txt
-## │   │   ├── supporting
-## │   │   │   ├── cleanroom_import.R
-## │   │   │   └── md5sum.R
-## │   │   └── v01
-## │   │       ├── 2023-12-15_cleanroom_counts.csv
-## │   │       └── 2023-12-15_md5sum_cleanroom_counts.md5
-## │   ├── Data002
-## │   │   ├── experimental_design_notes.xlsx
-## │   │   └── README.txt
-## │   └── README.txt
-## ├── 2_data_clean
-## │   └── cleaned_data_sample.csv
-## ├── 3_analysis
-## │   ├── 01_import_and_clean.R
-## │   ├── 02_analysis.R
-## │   └── 03_visualizations.R
-## ├── 5_meta
-## │   ├── data_dictionary.md
-## │   └── variable_definitions.md
-## ├── 6_log
-## │   └── run_log.md
-## └── guerrilla_project.Rproj</code></pre>
+<p>This project has been a challenging but rewarding exploration of the practicalities behind variant analysis in R. It highlighted the importance of choosing tools that align with both data and computing resources.</p>
 
 </div>
 </div>
@@ -302,8 +293,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="looking-ahead.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="c.elegans-plate-experiment.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="creating-r-package.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

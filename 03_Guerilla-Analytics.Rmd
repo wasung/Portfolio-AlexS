@@ -12,9 +12,9 @@ The focus is on organizing both:
 
 ### 1. **Reorganize Your DAUR-II Project**
 
-- Locate your RStudio project folder used for the **DAUR-II assignments**.
-- Download your work **without the heavy data files or kraken-database**.
-- Restructure the folder according to the **Guerrilla Analytics folder principles**.
+- Locate RStudio project folder used for the **DAUR-II assignments**.
+- Download your work without the heavy data files
+- Restructure the folder according to the Guerrilla Analytics folder principles
 
 #### Data folders should contain:
 - Only a `README.txt` file

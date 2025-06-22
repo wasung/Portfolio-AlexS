@@ -2,7 +2,7 @@
 title: "09_Optimising_Contamination_Control_Strategies"
 output: html_document
 ---
-#Optimising
+# Optimising contamination control strategies in the cleanrooms of the Prinses Maxima Center
 
 Environmental monitoring is an essential part of maintaining microbiological quality control in pharmaceutical and biotechnological manufacturing:contentReference[oaicite:4]{index=4}. Cleanroom studies have shown that the typical microflora found in such controlled environments originate primarily from human skin (Gram-positive cocci), with smaller contributions from environmental organisms (Gram-positive rods) and waterborne bacteria (Gram-negative rods):contentReference[oaicite:5]{index=5}. Tracking these flora over time is important – shifts in the types or numbers of microbes may signal deviations from normal conditions, such as the emergence of resistant strains or issues with cleaning procedures[@sandleReviewCleanroomMicroflora2011]. For instance, a five-year survey of a cell therapy production facility found that 97.8% of the isolates were Gram-positive bacteria (mostly Staphylococcus species), and no fungi were detected, indicating that personnel were the main source of contamination[@morandiMicrobesIdentifiedMonitoring2024]. This underscores that human operators can be significant contributors to cleanroom contamination, and rigorous personnel hygiene and monitoring are critical.
 

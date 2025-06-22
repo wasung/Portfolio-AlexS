@@ -35,8 +35,6 @@ The paper has  R code shared in the project environment and has clear instructio
 (Describe the code:)
 The script runs smoohtly after installing all packages. I got the code from : https://github.com/ImperialCollegeLondon/covid19model.git
 
-It clearly states version 7 was used for the Nature paper so I used that one. For this base-nature.r script was used.
-On a scale from 1-5 I would rate this paper a 5 in how easy it was to reproduce. I could import the all the scripts from their github and rerun their data through the scripts the used.
 
 ```{r visualization, eval=FALSE, warning=FALSE}
 library(rstan)
@@ -174,4 +172,20 @@ source('~/Portfolio-AlexS/Opdracht 4 - Reproducible Science/4b - Nature article 
 make_table(filename)
 
 ```
+## Estimated Impact of Interventions
 
+One of the most informative outcomes from the model is the estimated effect size of various non-pharmaceutical interventions (NPIs), such as lockdowns, school closures, and self-isolation. The figure below visualizes the **relative reduction in viral transmissibility (Rt)** attributed to each intervention.
+
+Two types of estimates are shown:
+- **First intervention**: Effect when an NPI was the first policy applied in a country
+- **Later intervention**: Effect when an NPI was implemented after other interventions
+
+```{r covariate-effects, echo=FALSE, out.width = "90%", fig.cap = "Posterior estimates of the relative reduction in COVID-19 transmission (Rt) for different interventions. Shown are median effects and 95% credible intervals. ‘First intervention’ estimates reflect the standalone impact when an NPI was the first to be introduced in a country. ‘Later intervention’ estimates are for subsequent applications of the same intervention."}
+knitr::include_graphics(
+  here::here("Opdracht 4 - Reproducible Science", "4b - Nature article files", "covars-alpha-reductionbase-nature-2048690.png")
+)
+```
+
+The x-axis shows the estimated percentage reduction in Rt, ranging from 0% (no effect) to 100% (complete suppression). Lockdowns and self-isolation consistently show the largest effect sizes, though results vary by timing and context.This covariate analysis offers into the relative impact of governmental policies on controlling pandemic spread. 
+
+I rate this project a 5/5 for reproducibility: with clearly structured code, data, and documentation, I could reproduce the results and produce the same analytical outputs used in the paper. This reinforces the importance of open science in pandemic response and academic transparency.

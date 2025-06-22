@@ -5,44 +5,26 @@ The goal is to apply the **Guerrilla Analytics** framework to structure and docu
 The focus is on organizing a project (RNAseq & metagenomics analysis)
 ---
 
-### 1. **Reorganize Your  Project**
-
-- Locate RStudio project folder used for the **DAUR-II assignments**.
-- Download your work without the heavy data files
-- Restructure the folder according to the Guerrilla Analytics folder principles
-
-#### Data folders should contain:
-- Only a `README.txt` file
-- The `README.txt` should include:
-  - Description of the dataset
-  - Data format
-  - Where the data is stored (path or location)
-  - Any preprocessing steps or notes
-
----
-
-### 2. **Apply to Your RNAseq and Metagenomics Work**
-
-You previously worked with:
-
-- **3 RNAseq datasets**
-  - One of them was the **exam project**
-- **2 Metagenomics datasets**
-
-For each dataset:
-- Create a **modular folder** (e.g., `Data001`, `Data002`, etc.)
-- Add a `README.txt` inside each module
-- Add any import or checksum scripts to a `supporting/` subfolder
-
----
-
-### 3. **Use the `{fs}` Package to Generate a Folder Tree Screenshot**
+## **Organize Your  Project**
+I made a native folder and organised this with empty files in the way you would according to Guerilla analytics
 
 To showcase your new project structure:
 
-``` {r Generate folder tree}
+``` {r Generate folder tree generated folder}
 library(fs)
 
 # Print your current directory tree (recursively)
 dir_tree("Opdracht 5 - Guerilla analytics", recurse = TRUE)
+```
+---
+
+## Organisation of current folder
+I also tried to make use of the guidelines of Guerilla analytics for this folder:
+
+
+```{r generate-folder-tree}
+library(fs)
+
+# Print the directory tree of the current working directory
+dir_tree(".", recurse = TRUE)
 ```

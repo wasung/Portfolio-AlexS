@@ -1,3 +1,4 @@
+fig:covariate-effects
 introduction
 contact
 curriculum-vitae-wing-kien-alex-sung
@@ -11,10 +12,8 @@ what-didnt-work
 conclusion-and-recommendations
 guerilla-analytics
 the-focus-is-on-organizing-a-project-rnaseq-metagenomics-analysis
-reorganize-your-project
-data-folders-should-contain
-apply-to-your-rnaseq-and-metagenomics-work
-use-the-fs-package-to-generate-a-folder-tree-screenshot
+organize-your-project
+organisation-of-current-folder
 c.elegans-plate-experiment
 exploring-the-excel-dataset-structure
 importing-the-dataset-into-r
@@ -34,8 +33,9 @@ ethics-statement
 funding-statement
 data-availability-statement-and-location
 estimating-the-effects-of-non-pharmaceutical-interventions-on-covid-19-in-europe
+estimated-impact-of-interventions
 relational-databases
 genetrackr
-parameterized-covid
+optimising-contamination-control-strategies-in-the-cleanrooms-of-the-prinses-maxima-center
 covid-19-trend-in-netherlands-2020
 references

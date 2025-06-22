@@ -2,7 +2,6 @@
 title: "COVID-19 Cases and Deaths in Netherlands in 2020"  
 output: html_document  
 ---
-# Parameterized Covid
 ```{r setup, include=FALSE}
 # Load required packages and set global chunk options
 library(utils)      # for read.csv (likely already available by default)

@@ -1,4 +1,4 @@
-# Reproducable research b part 1
+# Reproducable research part 1
 
 ## Heterologous prime-boost immunisation with mRNA- and AdC68-based 2019-nCoV variant vaccines induces broad-spectrum immune responses in mice
 Xingxing Li, Jingjing Liu, Wenjuan Li, Qinhua Peng, Miao Li, Zhifang Ying, Zelun Zhang, Xinyu Liu, Xiaohong Wu, Danhua Zhao, Lihong Yang, Shouchun Cao, Yanqiu Huang, Leitai Shi, Hongshan Xu, Yunpeng Wang, Guangzhi Yue, Yue Suo, Jianhui Nie, Weijin Huang, Jia Li, * and Yuhua Li.
@@ -8,7 +8,7 @@ https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10050358/ (add reference later)
 Add research question
 Add summary methode en resultaten
 
-#Reproducable research b part 2
+#Reproducable research part 2
 
 ### Study purpose
 There was no concise statement in the introduction of the article, that established the reason the research was conducted.
@@ -25,7 +25,9 @@ There is no section on fundings, however there is a section on acknowledgements.
 ### Data availability statement and location
 There is a small section where supplementary materials can be accessed. THere is a download link to the 'data sheet'. The sheet is a word doc with the processed data in figures in a doc file. Access to raw data would be better to have. It does however mention that you can inquire for more data but it requires you to contact the authors but, there is no author contact info available. Furthermore no code was used for this research.
 
-#Reproducable research b part 3
+#Reproducable research b part 1
+
+Since no code was used I decided to reproduce another article which was this the following:
 
 ## Estimating the effects of non-pharmaceutical interventions on COVID-19 in Europe
 (https://www.nature.com/articles/s41586-020-2405-7)

@@ -2,6 +2,11 @@
 title: "Portfolio DSFB"
 site: bookdown::bookdown_site
 documentclass: book
+bibliography: References.bib
+params:  
+  country: "Netherlands"      # Default country  
+  year: 2020                  # Default year  
+  months: !r 1:12             # Default months (as a numeric vector, here Jan–Dec)  
 ---
 
 # Introduction

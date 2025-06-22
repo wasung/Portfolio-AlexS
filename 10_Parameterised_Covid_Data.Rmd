@@ -1,0 +1,66 @@
+---  
+title: "COVID-19 Cases and Deaths in Netherlands in 2020"  
+output: html_document  
+---
+# Parameterized Covid
+```{r setup, include=FALSE}
+# Load required packages and set global chunk options
+library(utils)      # for read.csv (likely already available by default)
+library(dplyr)      # for data filtering
+library(ggplot2)    # for plotting
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## COVID-19 Trend in `r params$country` (`r params$year`)
+
+This report presents the daily number of newly reported COVID-19 cases and deaths in **`r params$country`** for the year **`r params$year`**, focusing on the months: **`r paste(params$months, collapse = ', ')`**. The data is sourced from the European Centre for Disease Prevention and Control (ECDC) and includes all EU/EEA countries' daily case counts and fatalities.
+
+```{r data-load}
+# Read the COVID-19 daily data directly from the ECDC CSV source
+data_url <- "https://opendata.ecdc.europa.eu/covid19/nationalcasedeath_eueea_daily_ei/csv"
+covid_data <- read.csv(data_url, na.strings = "", fileEncoding = "UTF-8-BOM")  # :contentReference[oaicite:8]{index=8}
+
+# Filter the data for the chosen country, year, and months
+filtered_data <- covid_data %>%
+  filter(countriesAndTerritories == params$country, 
+         year == params$year, 
+         month %in% params$months)
+
+# Convert the date column to Date type for plotting (date format in data is dd/mm/YYYY)
+filtered_data$date <- as.Date(filtered_data$dateRep, format = "%d/%m/%Y")
+
+# Sort by date (ascending order)
+filtered_data <- filtered_data[order(filtered_data$date), ]
+```
+
+```{r results='asis', warning=FALSE, message=FALSE}
+# If no data is available for the given parameters, print a message and stop
+if(nrow(filtered_data) == 0) {
+  cat("*No data available for the selected parameters.*")
+  knitr::knit_exit()  # exit the knitting if no data
+}
+```
+
+**Summary of Selection:** For **`r params$country`**, there were a total of **`r sum(filtered_data$cases, na.rm=TRUE)`** reported cases and **`r sum(filtered_data$deaths, na.rm=TRUE)`** deaths in the selected period (`r params$year`, months `r paste(params$months, collapse=', ')`). The daily trends are shown in the graphs below.
+
+```{r plot-cases}
+# Plot daily new cases over time
+ggplot(filtered_data, aes(x = date, y = cases)) +
+  geom_line(color = "steelblue") +
+  geom_point(color = "steelblue", size = 0.7) +
+  labs(title = paste("Daily New COVID-19 Cases in", params$country, params$year),
+       x = "Date", y = "New Cases")
+```
+
+```{r plot-deaths}
+# Plot daily new deaths over time
+ggplot(filtered_data, aes(x = date, y = deaths)) +
+  geom_line(color = "firebrick") +
+  geom_point(color = "firebrick", size = 0.7) +
+  labs(title = paste("Daily New COVID-19 Deaths in", params$country, params$year),
+       x = "Date", y = "New Deaths")
+```
+
+*Figure:* Daily reported COVID-19 **cases** (top) and **deaths** (bottom) in `r params$country` for `r params$year` (months `r paste(params$months, collapse=', ')`). Each point represents the report for a single day. These trends illustrate the progression of the pandemic over the selected timeframe.
+
+# References

@@ -1,16 +1,11 @@
 # Guerilla Analytics
-Need to run the data at home through the pipe and clean up the folders still ( will use projecticum folders).
-## Assignment Overview
 
-In this assignment, the goal is to apply the **Guerrilla Analytics** framework to structure and document your project in a reproducible, collaborative, and future-proof way.
+The goal is to apply the **Guerrilla Analytics** framework to structure and document a project in a reproducible, collaborative, and future-proof way.
 
-The focus is on organizing both:
-- The **DAUR-II** project (RNAseq & metagenomics analysis), and
-- The **Projecticum** (ongoing group project in DSFB2)
-
+The focus is on organizing a project (RNAseq & metagenomics analysis)
 ---
 
-### 1. **Reorganize Your DAUR-II Project**
+### 1. **Reorganize Your  Project**
 
 - Locate RStudio project folder used for the **DAUR-II assignments**.
 - Download your work without the heavy data files
@@ -49,5 +44,5 @@ To showcase your new project structure:
 library(fs)
 
 # Print your current directory tree (recursively)
-dir_tree("guerrilla-project", recurse = TRUE)
+dir_tree("Opdracht 5 - Guerilla analytics", recurse = TRUE)
 ```
